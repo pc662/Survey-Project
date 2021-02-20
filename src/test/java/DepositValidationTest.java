@@ -8,8 +8,11 @@ public class DepositValidationTest {
 
     public static final String savingsID = "12345678";
     public static final String checkingID = "01234567";
+    public static final String cdID = "23456789";
+
     DepositValidation validation;
     Bank bank = new Bank();
+
     Checking checking = new Checking(checkingID, 0.01);
     Saving saving = new Saving(savingsID, 0.01);
     CertificateOfDeposit cd = new CertificateOfDeposit("23456789", 0.01, 500);
@@ -226,6 +229,23 @@ public class DepositValidationTest {
         assertTrue(validation.validate());
     }
 
+    @Test
+    void CD_validate_number_as_incorrect() {
+        validation = verify("deposit " + cdID + " 1000");
+        assertFalse(validation.validate());
+    }
+
+    @Test
+    void CD_validate_nothing_after() {
+        validation = verify("deposit " + cdID);
+        assertFalse(validation.validate());
+    }
+
+    @Test
+    void CD_validate_with_0_dollars() {
+        validation = verify("deposit " + cdID + " 0.00");
+        assertFalse(validation.validate());
+    }
 
     private DepositValidation verify(String s) {
         return new DepositValidation(s, bank);

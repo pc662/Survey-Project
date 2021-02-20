@@ -97,6 +97,12 @@ public class CreateValidationTest {
     }
 
     @Test
+    void account_type_validate_as_negative_letters() {
+        validation = verify("create -checking 01234567 0.01");
+        assertFalse(validation.validate());
+    }
+
+    @Test
     void account_type_validate_nothing_after_account_type() {
         validation = verify("create checking");
         assertFalse(validation.validate());
