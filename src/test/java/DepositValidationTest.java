@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -10,6 +11,10 @@ public class DepositValidationTest {
     Checking checking = new Checking("01234567", 0.01);
     Saving saving = new Saving("01234567", 0.01);
 
+    @BeforeEach
+    void initEach() {
+        bank.addAccount(checking);
+    }
 
     @Test
     void command_validate_correct_deposit() {
@@ -75,6 +80,18 @@ public class DepositValidationTest {
     @Test
     void ID_validate_incorrect_7_digit() {
         validation = verify("deposit 0123456 1000");
+        assertFalse(validation.validate());
+    }
+
+    @Test
+    void ID_validate_incorrect_9_digit() {
+        validation = verify("deposit 012345678 1000");
+        assertFalse(validation.validate());
+    }
+
+    @Test
+    void ID_validate_account_does_not_exist() {
+        validation = verify("deposit 01234568 1000");
         assertFalse(validation.validate());
     }
 

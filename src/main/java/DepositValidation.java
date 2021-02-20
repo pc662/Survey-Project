@@ -48,7 +48,15 @@ public class DepositValidation extends Validation {
         if (splitString[1].length() != 8) {
             return false;
         } else {
+            return validateAccountExists();
+        }
+    }
+
+    public boolean validateAccountExists() {
+        if (bank.getStoredAccounts().containsKey(splitString[1])) {
             return true;
+        } else {
+            return false;
         }
     }
 
