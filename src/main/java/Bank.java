@@ -20,14 +20,10 @@ public class Bank {
         return (Account) accounts.get(ID);
     }
 
-    public boolean isAccountDepositAmountValid(String id, int depositAmount) {
+    public boolean isAccountDepositAmountValid(String id, double depositAmount) {
         Account account = (Account) accounts.get(id);
-        boolean valid = account.isValid(depositAmount);
-        return valid;
+        return account.isValid(depositAmount);
     }
 
-    public boolean isAccountASaving(String id, String depositAmount) {
-
-    }
 
 }

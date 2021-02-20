@@ -62,7 +62,12 @@ public class DepositValidation extends Validation {
 
     @Override
     public boolean validateAccountType() {
-
+        try {
+            double depositAmount = Double.parseDouble(splitString[2]);
+            return bank.isAccountDepositAmountValid(splitString[1], depositAmount);
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 
