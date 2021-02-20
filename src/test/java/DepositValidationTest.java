@@ -59,6 +59,19 @@ public class DepositValidationTest {
         assertFalse(validation.validate());
     }
 
+    //ID portion
+    @Test
+    void ID_validate_correct_8_digit() {
+        validation = verify("deposit 01234567 1000");
+        assertTrue(validation.validate());
+    }
+
+    @Test
+    void ID_validate_incorrect_7_digit() {
+        validation = verify("deposit 0123456 1000");
+        assertFalse(validation.validate());
+    }
+
 
     private DepositValidation verify(String s) {
         return new DepositValidation(s, bank);

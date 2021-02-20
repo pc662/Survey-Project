@@ -22,7 +22,7 @@ public class DepositValidation extends Validation {
         if (stringLength != 3) {
             return false;
         } else {
-            return true;
+            return validateID();
         }
     }
 
