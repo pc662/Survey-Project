@@ -26,15 +26,22 @@ public class Validation {
 
     private boolean validateAccountType() {
         if (isAccountType()) {
-            if (!splitString[1].equalsIgnoreCase("cd")) {
-                if (splitString.length >= 5) {
-                    return false;
-                }
+            if (isNotCDVerify()) {
+                return false;
             }
             return validateID();
         } else {
             return false;
         }
+    }
+
+    private boolean isNotCDVerify() {
+        if (!splitString[1].equalsIgnoreCase("cd")) {
+            if (splitString.length >= 5) {
+                return true;
+            }
+        }
+        return false;
     }
 
 

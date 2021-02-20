@@ -53,6 +53,12 @@ public class CreateValidationTest {
         assertFalse(validation.validate());
     }
 
+    @Test
+    void validate_five_arguments_for_cd() {
+        validation = verify("create cD 01234567 0.01% 100");
+        assertTrue(validation.validate());
+    }
+
     //Testing the account type portion
 
     @Test
