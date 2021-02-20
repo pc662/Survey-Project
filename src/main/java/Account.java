@@ -39,6 +39,12 @@ public abstract class Account {
         }
     }
 
+    public double getAPR() {
+        return APR;
+    }
+
+    public abstract boolean isTypeValid(String id, String depositAmount);
+
     private boolean isLessThanZero(int amount) {
         if (amount < 0) {
             return true;
@@ -47,7 +53,4 @@ public abstract class Account {
         }
     }
 
-    public double getAPR() {
-        return APR;
-    }
 }

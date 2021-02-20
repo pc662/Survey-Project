@@ -4,4 +4,9 @@ public class CertificateOfDeposit extends Account {
         super("CD", identifier, apr);
         this.setBalance(startAmount);
     }
+
+    @Override
+    public boolean isTypeValid(String id, String depositAmount) {
+        return false;
+    }
 }

@@ -20,4 +20,14 @@ public class Bank {
         return (Account) accounts.get(ID);
     }
 
+    public boolean isAccountAChecking(String id, String depositAmount) {
+        Account account = (Account) accounts.get(id);
+        boolean isValid = account.isTypeValid("checking", depositAmount);
+        return isValid;
+    }
+
+    public boolean isAccountASaving(String id, String depositAmount) {
+
+    }
+
 }
