@@ -45,8 +45,8 @@ public class Validation {
 
     private boolean validateAPR() {
         try {
-            int apr = Integer.parseInt(splitString[3]);
-            if (apr > 10 || apr < 0) {
+            double apr = Double.parseDouble(splitString[3]);
+            if (apr > 10.00 || apr < 0.00) {
                 return false;
             } else {
                 return true;
