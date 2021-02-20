@@ -110,7 +110,7 @@ public class CreateValidation extends Validation {
 
     private boolean isNotCDVerify() {
         if (!splitString[1].equalsIgnoreCase("cd")) {
-            if (splitString.length >= 5) {
+            if (stringLength >= 5) {
                 return true;
             }
         }
@@ -131,7 +131,7 @@ public class CreateValidation extends Validation {
     }
 
     private boolean checkLength() {
-        if (splitString.length < 4 || splitString.length > 5) {
+        if (stringLength < 4 || stringLength > 5) {
             return true;
         }
         return false;

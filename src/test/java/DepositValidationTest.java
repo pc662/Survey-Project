@@ -53,6 +53,12 @@ public class DepositValidationTest {
         assertFalse(validation.validate());
     }
 
+    @Test
+    void command_validate_nothing_after_deposit() {
+        validation = verify("deposit");
+        assertFalse(validation.validate());
+    }
+
 
     private DepositValidation verify(String s) {
         return new DepositValidation(s, bank);

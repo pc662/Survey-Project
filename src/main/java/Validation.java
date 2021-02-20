@@ -1,6 +1,7 @@
 public abstract class Validation {
 
     String[] splitString;
+    int stringLength;
     Bank bank;
     String command;
     String accountType;
@@ -11,6 +12,7 @@ public abstract class Validation {
 
     public Validation(String string, Bank bank) {
         splitString = string.split(" ", 0);
+        stringLength = splitString.length;
         this.bank = bank;
     }
 

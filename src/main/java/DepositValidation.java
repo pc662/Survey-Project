@@ -12,9 +12,17 @@ public class DepositValidation extends Validation {
     @Override
     public boolean validateCommand() {
         if (splitString[0].equalsIgnoreCase("deposit")) {
-            return true;
+            return checkLength();
         } else {
             return false;
+        }
+    }
+
+    private boolean checkLength() {
+        if (stringLength != 3) {
+            return false;
+        } else {
+            return true;
         }
     }
 
