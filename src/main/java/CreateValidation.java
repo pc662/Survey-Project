@@ -10,11 +10,13 @@ public class CreateValidation extends Validation {
         return validateCommand();
     }
 
-    private boolean validateCommand() {
+    @Override
+    public boolean validateCommand() {
         if (isCreateCommand()) {
             if (checkLength()) {
                 return false;
             }
+            command = splitString[0];
             return validateAccountType();
         } else {
             return false;
@@ -28,6 +30,7 @@ public class CreateValidation extends Validation {
             if (isNotCDVerify()) {
                 return false;
             }
+            accountType = splitString[1];
             return validateID();
         } else {
             return false;
@@ -43,8 +46,39 @@ public class CreateValidation extends Validation {
         }
     }
 
+    private boolean isDuplicateOrNot() {
+        if (!bank.getStoredAccounts().containsKey(splitString[2])) {
+            ID = splitString[2];
+            return validateAPR();
+        } else {
+            return false;
+        }
+    }
+
     private boolean validateAPR() {
         return checkValueAsDouble();
+    }
+
+    private boolean checkValueAsDouble() {
+        try {
+            double apr = Double.parseDouble(splitString[3]);
+            return verifyCDAmount(apr);
+
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    private boolean verifyCDAmount(double apr) {
+        if (apr > 10.00 || apr < 0.00) {
+            return false;
+        } else {
+            APR = apr;
+            if (ifCD()) {
+                return validateCDAmount();
+            }
+            return true;
+        }
     }
 
     private boolean validateCDAmount() {
@@ -57,6 +91,7 @@ public class CreateValidation extends Validation {
             if (cdAmount < 1000 || cdAmount > 10000) {
                 return false;
             } else {
+                cdMoney = cdAmount;
                 return true;
             }
         } catch (Exception e) {
@@ -64,22 +99,6 @@ public class CreateValidation extends Validation {
         }
     }
 
-    private boolean checkValueAsDouble() {
-        try {
-            double apr = Double.parseDouble(splitString[3]);
-            if (apr > 10.00 || apr < 0.00) {
-                return false;
-            } else {
-                if (ifCD()) {
-                    return validateCDAmount();
-                }
-                return true;
-            }
-
-        } catch (Exception e) {
-            return false;
-        }
-    }
 
     private boolean ifCD() {
         if (splitString[1].equalsIgnoreCase("cd")) {
@@ -98,14 +117,6 @@ public class CreateValidation extends Validation {
         return false;
     }
 
-
-    private boolean isDuplicateOrNot() {
-        if (!bank.getStoredAccounts().containsKey(splitString[2])) {
-            return validateAPR();
-        } else {
-            return false;
-        }
-    }
 
     private boolean isID() {
         return (splitString[2].matches("[0-9]+")) && (splitString[2].length() == 8);
