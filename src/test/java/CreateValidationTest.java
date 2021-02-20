@@ -71,7 +71,7 @@ public class CreateValidationTest {
 
     @Test
     void validate_cd_account_type() {
-        validation = verify("create cd 01234567 0.01");
+        validation = verify("create cd 01234567 0.01 1000");
         assertTrue(validation.validate());
     }
 
@@ -79,7 +79,7 @@ public class CreateValidationTest {
     void validate_case_insensitive_for_all_account_types() {
         Validation checkingValidation = verify("create cHecKing 01234567 0.01");
         Validation savingValidation = verify("create sAviNg 01234567 0.01");
-        Validation cdValidation = verify("create cD 01234567 0.01");
+        Validation cdValidation = verify("create cD 01234567 0.01 1000");
         assertTrue(checkingValidation.validate());
         assertTrue(savingValidation.validate());
         assertTrue(cdValidation.validate());
@@ -111,7 +111,7 @@ public class CreateValidationTest {
 
     @Test
     void validate_five_arguments_for_cd() {
-        validation = verify("create cD 01234567 0.01 100");
+        validation = verify("create cD 01234567 0.01 1000");
         assertTrue(validation.validate());
     }
 
@@ -255,10 +255,45 @@ public class CreateValidationTest {
     @Test
     void validate_apr_with_edge_9() {
         validation = verify("create saving 01234567 9.999");
+        assertTrue(validation.validate());
     }
 
     //cd testing
     @Test
+    void validate_cd_amount_with_1000() {
+        validation = verify("create cd 01234567 0.01 1000");
+        assertTrue(validation.validate());
+    }
+
+    @Test
+    void validate_cd_amount_with_999() {
+        validation = verify("create cd 01234567 0.01 999");
+        assertFalse(validation.validate());
+    }
+
+    @Test
+    void validate_cd_amount_with_1001() {
+        validation = verify("create cd 01234567 0.01 1001");
+        assertTrue(validation.validate());
+    }
+
+    @Test
+    void validate_cd_amount_with_0() {
+        validation = verify("create cd 01234567 0.01 0)");
+        assertFalse(validation.validate());
+    }
+
+    @Test
+    void validate_cd_amount_with_10000() {
+        validation = verify("create cd 01234567 0.01 10000");
+        assertTrue(validation.validate());
+    }
+
+    @Test
+    void validate_cd_amount_with_10001() {
+        validation = verify("create cd 01234567 0.01 10001");
+        assertFalse(validation.validate());
+    }
 
 
     private Validation verify(String s) {
