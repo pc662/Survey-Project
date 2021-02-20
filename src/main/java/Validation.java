@@ -14,6 +14,9 @@ public class Validation {
 
     private boolean validateCommand() {
         if (isCreateCommand()) {
+            if (checkLength()) {
+                return false;
+            }
             return validateAccountType();
         } else {
             return false;
@@ -23,12 +26,17 @@ public class Validation {
 
     private boolean validateAccountType() {
         if (isAccountType()) {
+            if (!splitString[1].equalsIgnoreCase("cd")) {
+                if (splitString.length >= 5) {
+                    return false;
+                }
+            }
             return validateID();
         } else {
             return false;
         }
-
     }
+
 
     private boolean validateID() {
         if (isID()) {
@@ -57,6 +65,13 @@ public class Validation {
 
     private boolean isAccountType() {
         return splitString[1].equalsIgnoreCase("CD") || splitString[1].equalsIgnoreCase("checking") || splitString[1].equalsIgnoreCase("saving");
+    }
+
+    private boolean checkLength() {
+        if (splitString.length < 4 || splitString.length > 5) {
+            return true;
+        }
+        return false;
     }
 
 
