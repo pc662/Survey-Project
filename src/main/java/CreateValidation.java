@@ -1,7 +1,5 @@
-public class CreateValidation {
+public class CreateValidation extends Validation {
 
-    String[] splitString;
-    Bank bank;
 
     public CreateValidation(String string, Bank bank) {
         splitString = string.split(" ", 0);

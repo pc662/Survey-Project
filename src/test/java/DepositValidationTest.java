@@ -1,7 +1,3 @@
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 public class DepositValidationTest {
 
     CreateValidation validation;
@@ -10,7 +6,7 @@ public class DepositValidationTest {
     Saving saving = new Saving("01234567", 0.01);
 
 
-    @Test
+    /*@Test
     void command_validate_correct_deposit() {
         validation = verify("Deposit 01234567 1000");
         assertTrue(validation.validate());
@@ -18,6 +14,6 @@ public class DepositValidationTest {
 
     private CreateValidation verify(String s) {
         return new DepositValidation(s, bank);
-    }
+    }*/
 
 }
