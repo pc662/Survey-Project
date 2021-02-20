@@ -1,9 +1,9 @@
-public class Validation {
+public class CreateValidation {
 
     String[] splitString;
     Bank bank;
 
-    public Validation(String string, Bank bank) {
+    public CreateValidation(String string, Bank bank) {
         splitString = string.split(" ", 0);
         this.bank = bank;
     }
