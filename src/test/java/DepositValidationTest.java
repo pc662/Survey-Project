@@ -176,6 +176,12 @@ public class DepositValidationTest {
     }
 
     @Test
+    void amount_validate_savings_with_smaller_decimal() {
+        validation = verify("deposit " + savingsID + " 0.000000000001");
+        assertTrue(validation.validate());
+    }
+
+    @Test
     void amount_validate_checking_with_negative_one() {
         validation = verify("deposit " + checkingID + " -1");
         assertFalse(validation.validate());
@@ -226,6 +232,12 @@ public class DepositValidationTest {
     @Test
     void amount_validate_checking_with_small_decimal() {
         validation = verify("deposit " + checkingID + " 0.01");
+        assertTrue(validation.validate());
+    }
+
+    @Test
+    void amount_validate_checking_with_smaller_decimal() {
+        validation = verify("deposit " + checkingID + " 0.00000000001");
         assertTrue(validation.validate());
     }
 
