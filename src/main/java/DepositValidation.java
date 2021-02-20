@@ -28,7 +28,28 @@ public class DepositValidation extends Validation {
 
     @Override
     public boolean validateID() {
-        return true;
+        if (isInt(splitString[1])) {
+            return isEightDigits();
+        } else {
+            return false;
+        }
+    }
+
+    public boolean isInt(String integer) {
+        try {
+            Integer.parseInt(integer);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean isEightDigits() {
+        if (splitString[1].length() != 8) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     @Override

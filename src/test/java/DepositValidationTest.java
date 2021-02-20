@@ -67,6 +67,12 @@ public class DepositValidationTest {
     }
 
     @Test
+    void ID_validate_as_letters() {
+        validation = verify("deposit abcdedfs 1000");
+        assertFalse(validation.validate());
+    }
+
+    @Test
     void ID_validate_incorrect_7_digit() {
         validation = verify("deposit 0123456 1000");
         assertFalse(validation.validate());
