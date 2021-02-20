@@ -295,6 +295,30 @@ public class CreateValidationTest {
         assertFalse(validation.validate());
     }
 
+    @Test
+    void validate_cd_amount_with_9999() {
+        validation = verify("create cd 01234567 0.01 9999");
+        assertTrue(validation.validate());
+    }
+
+    @Test
+    void validate_cd_amount_with_letters() {
+        validation = verify("create cd 01234567 0.01 abcd");
+        assertFalse(validation.validate());
+    }
+
+    @Test
+    void validate_cd_amount_with_symbols() {
+        validation = verify("create cd 01234567 0.01 %@#$!");
+        assertFalse(validation.validate());
+    }
+
+    @Test
+    void validate_cd_amount_with_right_number() {
+        validation = verify("create cd 01234567 0.01 5693");
+        assertTrue(validation.validate());
+    }
+
 
     private Validation verify(String s) {
         return new Validation(s, bank);
