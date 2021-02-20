@@ -234,6 +234,24 @@ public class CreateValidationTest {
         assertFalse(validation.validate());
     }
 
+    @Test
+    void validate_apr_with_a_percent() {
+        validation = verify("create saving 01234567 0.01%");
+        assertFalse(validation.validate());
+    }
+
+    @Test
+    void validate_apr_with_large_positive() {
+        validation = verify("create saving 01234567 10000000000000");
+        assertFalse(validation.validate());
+    }
+
+    @Test
+    void validate_apr_with_large_negative() {
+        validation = verify("create saving 01234567 -10000000000000");
+        assertFalse(validation.validate());
+    }
+
 
     private Validation verify(String s) {
         return new Validation(s, bank);

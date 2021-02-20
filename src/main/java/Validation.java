@@ -44,6 +44,10 @@ public class Validation {
     }
 
     private boolean validateAPR() {
+        return checkValueAsDouble();
+    }
+
+    private boolean checkValueAsDouble() {
         try {
             double apr = Double.parseDouble(splitString[3]);
             if (apr > 10.00 || apr < 0.00) {
