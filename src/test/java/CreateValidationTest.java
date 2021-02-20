@@ -47,17 +47,6 @@ public class CreateValidationTest {
         assertFalse(validation.validate());
     }
 
-    @Test
-    void validate_more_than_four_and_not_cd() {
-        validation = verify("create checking 01234567 0.01% 100");
-        assertFalse(validation.validate());
-    }
-
-    @Test
-    void validate_five_arguments_for_cd() {
-        validation = verify("create cD 01234567 0.01% 100");
-        assertTrue(validation.validate());
-    }
 
     //Testing the account type portion
 
@@ -112,6 +101,18 @@ public class CreateValidationTest {
     void validate_nothing_after_account_type() {
         validation = verify("create checking");
         assertFalse(validation.validate());
+    }
+
+    @Test
+    void validate_more_than_four_and_not_cd() {
+        validation = verify("create checking 01234567 0.01% 100");
+        assertFalse(validation.validate());
+    }
+
+    @Test
+    void validate_five_arguments_for_cd() {
+        validation = verify("create cD 01234567 0.01% 100");
+        assertTrue(validation.validate());
     }
 
     //Test for ID
@@ -187,6 +188,20 @@ public class CreateValidationTest {
     @Test
     void validate_id_with_nothing_else() {
         validation = verify("create saving 01234567");
+        assertFalse(validation.validate());
+    }
+
+    //APR
+    @Test
+    void validate_apr_with_correct_number() {
+        validation = verify("create saving 01234567 0.01");
+        assertTrue(validation.validate());
+    }
+
+
+    @Test
+    void validate_not_a_number_apr() {
+        validation = verify("create saving 01234567 abc");
         assertFalse(validation.validate());
     }
 

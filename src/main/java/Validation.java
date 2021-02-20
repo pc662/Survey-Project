@@ -35,6 +35,28 @@ public class Validation {
         }
     }
 
+    private boolean validateID() {
+        if (isID()) {
+            return isDuplicateOrNot();
+        } else {
+            return false;
+        }
+    }
+
+    private boolean validateAPR() {
+        try {
+            int apr = Integer.parseInt(splitString[3]);
+            if (apr > 10 || apr < 0) {
+                return false;
+            } else {
+                return true;
+            }
+
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     private boolean isNotCDVerify() {
         if (!splitString[1].equalsIgnoreCase("cd")) {
             if (splitString.length >= 5) {
@@ -45,18 +67,9 @@ public class Validation {
     }
 
 
-    private boolean validateID() {
-        if (isID()) {
-            return isDuplicateOrNot();
-        } else {
-            return false;
-        }
-    }
-
-
     private boolean isDuplicateOrNot() {
         if (!bank.getStoredAccounts().containsKey(splitString[2])) {
-            return true;
+            return validateAPR();
         } else {
             return false;
         }
