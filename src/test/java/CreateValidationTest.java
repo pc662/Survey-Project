@@ -124,6 +124,36 @@ public class CreateValidationTest {
         assertFalse(validation.validate());
     }
 
+    @Test
+    void validate_id_with_commas() {
+        validation = getValidation("create saving 012345,6 0.01%");
+        assertFalse(validation.validate());
+    }
+
+    @Test
+    void validate_id_with_seven_digits() {
+        validation = getValidation("create saving 0123456 0.01%");
+        assertFalse(validation.validate());
+    }
+
+    @Test
+    void validate_id_with_nine_digits() {
+        validation = getValidation("create saving 012345678 0.01%");
+        assertFalse(validation.validate());
+    }
+
+    @Test
+    void validate_id_with_one_digit() {
+        validation = getValidation("create saving 1 0.01%");
+        assertFalse(validation.validate());
+    }
+
+    @Test
+    void validate_id_with_twenty_digits() {
+        validation = getValidation("create saving 01234567890123456789 0.01%");
+        assertFalse(validation.validate());
+    }
+
 
     private Validation getValidation(String s) {
         return new Validation(s, bank);

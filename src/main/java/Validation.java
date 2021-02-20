@@ -38,6 +38,7 @@ public class Validation {
         }
     }
 
+
     private boolean isDuplicateOrNot() {
         if (!bank.getStoredAccounts().containsKey(splitString[2])) {
             return true;
