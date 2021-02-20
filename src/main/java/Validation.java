@@ -7,12 +7,16 @@ public class Validation {
     }
 
     public boolean validate() {
+        return validateCommand();
+    }
+
+    private boolean validateCommand() {
         if (splitString[0].equals("Create") || splitString[0].equals("create")) {
             return true;
         } else {
             return false;
         }
-
     }
+
 
 }

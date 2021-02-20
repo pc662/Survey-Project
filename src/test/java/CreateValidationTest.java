@@ -31,5 +31,12 @@ public class CreateValidationTest {
         assertFalse(validation.validate());
     }
 
+    //Testing the account type portion
+    @Test
+    void validate_account_type_as_number() {
+        Validation validation = new Validation("create 123456 01234567 0.01%");
+        assertFalse(validation.validate());
+    }
+
 
 }
