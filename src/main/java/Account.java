@@ -44,39 +44,28 @@ public abstract class Account {
     }
 
     public boolean isValid(double depositAmount) {
-        if (accountType.equals("checking")) {
-            return validateChecking(depositAmount);
-        } else if (accountType.equals("saving")) {
-            return validateSavings(depositAmount);
-        } else if (accountType.equals("cd")) {
-            return false;
-        } else {
-            return false;
+        switch (accountType) {
+            case "checking":
+                return validateChecking(depositAmount);
+            case "saving":
+                return validateSavings(depositAmount);
+            case "cd":
+                return false;
+            default:
+                return false;
         }
     }
 
     private boolean validateChecking(double depositAmount) {
-        if (depositAmount > 1000 || depositAmount < 0) {
-            return false;
-        } else {
-            return true;
-        }
+        return !(depositAmount > 1000) && !(depositAmount < 0);
     }
 
     private boolean validateSavings(double depositAmount) {
-        if (depositAmount > 2500 || depositAmount < 0) {
-            return false;
-        } else {
-            return true;
-        }
+        return !(depositAmount > 2500) && !(depositAmount < 0);
     }
 
     private boolean isLessThanZero(int amount) {
-        if (amount < 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return amount < 0;
     }
 
 }
