@@ -86,15 +86,36 @@ public class CreateValidationTest {
 
     //Test for ID
     @Test
-    void validate_id_correctness() {
+    void validate_correct_id() {
         validation = getValidation("create checking 01234567 0.01%");
         assertTrue(validation.validate());
+    }
+
+    @Test
+    void validate_incorrect_digits_id() {
+        validation = getValidation("create checking 0123456 0.01%");
+        assertFalse(validation.validate());
+    }
+
+    @Test
+    void validate_letters_as_id() {
+        validation = getValidation("create checking abcdesle 0.01%");
+        assertFalse(validation.validate());
+    }
+
+    @Test
+    void validate_letters_and_numbers_as_id() {
+        validation = getValidation("create checking abc123d4 0.01%");
+        assertFalse(validation.validate());
     }
 
     @Test
     void validate_id_duplication() {
         bank = new Bank();
         Checking checking = new Checking("01234567", 0.01);
+        bank.addAccount(checking);
+        validation = getValidation("create saving 01234567 0.01%");
+        assertFalse(validation.validate());
 
     }
 

@@ -21,11 +21,23 @@ public class Validation {
 
     private boolean validateAccountType() {
         if (isAccountType()) {
-            return true;
+            return validateID();
         } else {
             return false;
         }
 
+    }
+
+    private boolean validateID() {
+        if (isID()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean isID() {
+        return (splitString[2].matches("[0-9]+")) && (splitString[2].length() == 8);
     }
 
     private boolean isCommand() {
