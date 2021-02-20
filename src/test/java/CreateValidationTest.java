@@ -63,8 +63,8 @@ public class CreateValidationTest {
     }
 
     @Test
-    void account_type_validate_saving() {
-        validation = verify("create saving 01234567 0.01");
+    void account_type_validate_savings() {
+        validation = verify("create savings 01234567 0.01");
         assertTrue(validation.validate());
     }
 
@@ -77,10 +77,10 @@ public class CreateValidationTest {
     @Test
     void account_type_validate_case_insensitive_for_all_account_types() {
         Validation checkingValidation = verify("create cHecKing 01234567 0.01");
-        Validation savingValidation = verify("create sAviNg 01234567 0.01");
+        Validation savingsValidation = verify("create sAviNgs 01234567 0.01");
         Validation cdValidation = verify("create cD 01234567 0.01 1000");
         assertTrue(checkingValidation.validate());
-        assertTrue(savingValidation.validate());
+        assertTrue(savingsValidation.validate());
         assertTrue(cdValidation.validate());
     }
 
@@ -143,117 +143,117 @@ public class CreateValidationTest {
     void ID_validate_duplication() {
         Checking checking = new Checking("01234567", 0.01);
         bank.addAccount(checking);
-        validation = verify("create saving 01234567 0.01");
+        validation = verify("create savings 01234567 0.01");
         assertFalse(validation.validate());
 
     }
 
     @Test
     void ID_validate_as_decimals() {
-        validation = verify("create saving 012345.6 0.01");
+        validation = verify("create savings 012345.6 0.01");
         assertFalse(validation.validate());
     }
 
     @Test
     void ID_validate_with_commas() {
-        validation = verify("create saving 012345,6 0.01");
+        validation = verify("create savings 012345,6 0.01");
         assertFalse(validation.validate());
     }
 
     @Test
     void ID_validate_with_seven_digits() {
-        validation = verify("create saving 0123456 0.01");
+        validation = verify("create savings 0123456 0.01");
         assertFalse(validation.validate());
     }
 
     @Test
     void ID_validate_with_nine_digits() {
-        validation = verify("create saving 012345678 0.01");
+        validation = verify("create savings 012345678 0.01");
         assertFalse(validation.validate());
     }
 
     @Test
     void ID_validate_with_one_digit() {
-        validation = verify("create saving 1 0.01");
+        validation = verify("create savings 1 0.01");
         assertFalse(validation.validate());
     }
 
     @Test
     void ID_validate_with_twenty_digits() {
-        validation = verify("create saving 01234567890123456789 0.01");
+        validation = verify("create savings 01234567890123456789 0.01");
         assertFalse(validation.validate());
     }
 
     @Test
     void ID_validate_with_nothing_else() {
-        validation = verify("create saving 01234567");
+        validation = verify("create savings 01234567");
         assertFalse(validation.validate());
     }
 
     //APR
     @Test
     void APR_validate_with_correct_number() {
-        validation = verify("create saving 01234567 0.01");
+        validation = verify("create savings 01234567 0.01");
         assertTrue(validation.validate());
     }
 
     @Test
     void APR_validate_with_greater_than_10() {
-        validation = verify("create saving 01234567 11");
+        validation = verify("create savings 01234567 11");
         assertFalse(validation.validate());
     }
 
     @Test
     void APR_validate_with_9() {
-        validation = verify("create saving 01234567 9.00");
+        validation = verify("create savings 01234567 9.00");
         assertTrue(validation.validate());
     }
 
     @Test
     void APR_validate_with_0() {
-        validation = verify("create saving 01234567 0.00");
+        validation = verify("create savings 01234567 0.00");
         assertTrue(validation.validate());
     }
 
     @Test
     void APR_validate_with_negative() {
-        validation = verify("create saving 01234567 -0.01");
+        validation = verify("create savings 01234567 -0.01");
         assertFalse(validation.validate());
     }
 
     @Test
     void APR_validate_with_sign_inside() {
-        validation = verify("create saving 01234567 0.-01");
+        validation = verify("create savings 01234567 0.-01");
         assertFalse(validation.validate());
     }
 
     @Test
     void APR_validate_not_a_number() {
-        validation = verify("create saving 01234567 abc");
+        validation = verify("create savings 01234567 abc");
         assertFalse(validation.validate());
     }
 
     @Test
     void APR_validate_with_a_percent() {
-        validation = verify("create saving 01234567 0.01%");
+        validation = verify("create savings 01234567 0.01%");
         assertFalse(validation.validate());
     }
 
     @Test
     void APR_validate_with_large_positive() {
-        validation = verify("create saving 01234567 10000000000000");
+        validation = verify("create savings 01234567 10000000000000");
         assertFalse(validation.validate());
     }
 
     @Test
     void APR_validate_with_large_negative() {
-        validation = verify("create saving 01234567 -10000000000000");
+        validation = verify("create savings 01234567 -10000000000000");
         assertFalse(validation.validate());
     }
 
     @Test
     void APR_validate_with_edge_9() {
-        validation = verify("create saving 01234567 9.999");
+        validation = verify("create savings 01234567 9.999");
         assertTrue(validation.validate());
     }
 

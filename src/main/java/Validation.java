@@ -116,7 +116,7 @@ public class Validation {
     }
 
     private boolean isAccountType() {
-        return splitString[1].equalsIgnoreCase("CD") || splitString[1].equalsIgnoreCase("checking") || splitString[1].equalsIgnoreCase("saving");
+        return splitString[1].equalsIgnoreCase("CD") || splitString[1].equalsIgnoreCase("checking") || splitString[1].equalsIgnoreCase("savings");
     }
 
     private boolean checkLength() {
