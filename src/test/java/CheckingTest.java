@@ -8,7 +8,7 @@ public class CheckingTest {
     public static final String ZERO_IDENTIFIER = "00000000";
     public static final double APR = 0.01;
 
-    Account checking = new Checking(CHECKING, ZERO_IDENTIFIER, APR);
+    Account checking = new Checking(ZERO_IDENTIFIER, APR);
 
     @Test
     void checking_account_type() {

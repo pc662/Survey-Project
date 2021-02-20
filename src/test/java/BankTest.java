@@ -16,9 +16,9 @@ public class BankTest {
     public static final String cdID = "39203940";
 
     Bank bank = new Bank();
-    Account checking = new Checking(CHECKING, checkingID, APR);
-    Account saving = new Saving(SAVING, savingID, APR);
-    Account cd = new CertificateOfDeposit(CD, cdID, APR, startAmount);
+    Account checking = new Checking(checkingID, APR);
+    Account saving = new Saving(savingID, APR);
+    Account cd = new CertificateOfDeposit(cdID, APR, startAmount);
 
     @Test
     void bank_is_empty() {

@@ -9,7 +9,7 @@ public class CertificateOfDepositTest {
     public static final double APR = 0.01;
     public static final int START_AMOUNT = 1000;
 
-    Account cd = new CertificateOfDeposit(CD, ZERO_IDENTIFIER, APR, START_AMOUNT);
+    Account cd = new CertificateOfDeposit(ZERO_IDENTIFIER, APR, START_AMOUNT);
 
     @Test
     void CD_account_type() {

@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class CreateValidationTest {
 
     Validation validation;
+    Bank bank;
 
     //Overall test for a correct string
     @Test
@@ -86,7 +87,15 @@ public class CreateValidationTest {
     //Test for ID
     @Test
     void validate_id_correctness() {
-        //not implemented
+        validation = getValidation("create checking 01234567 0.01%");
+        assertTrue(validation.validate());
+    }
+
+    @Test
+    void validate_id_duplication() {
+        bank = new Bank();
+        Checking checking = new Checking("01234567", 0.01);
+
     }
 
     private Validation getValidation(String s) {
