@@ -252,6 +252,14 @@ public class CreateValidationTest {
         assertFalse(validation.validate());
     }
 
+    @Test
+    void validate_apr_with_edge_9() {
+        validation = verify("create saving 01234567 9.999");
+    }
+
+    //cd testing
+    @Test
+
 
     private Validation verify(String s) {
         return new Validation(s, bank);

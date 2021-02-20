@@ -47,12 +47,32 @@ public class Validation {
         return checkValueAsDouble();
     }
 
+    private boolean validateCDAmount() {
+        return verifyCDAmount();
+    }
+
+    private boolean verifyCDAmount() {
+        try {
+            double cdAmount = Double.parseDouble(splitString[4]);
+            if (cdAmount < 1000 || cdAmount > 10000) {
+                return false;
+            } else {
+                return true;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     private boolean checkValueAsDouble() {
         try {
             double apr = Double.parseDouble(splitString[3]);
             if (apr > 10.00 || apr < 0.00) {
                 return false;
             } else {
+                if (ifCD()) {
+                    return validateCDAmount();
+                }
                 return true;
             }
 
@@ -60,6 +80,14 @@ public class Validation {
             return false;
         }
     }
+
+    private boolean ifCD() {
+        if (splitString[1].equalsIgnoreCase("cd")) {
+            return true;
+        }
+        return false;
+    }
+
 
     private boolean isNotCDVerify() {
         if (!splitString[1].equalsIgnoreCase("cd")) {
