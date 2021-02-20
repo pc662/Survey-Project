@@ -3,9 +3,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ValidationTest {
+public class CreateValidationTest {
 
-
+    //Testing the create portion
     @Test
     void validate_proper_string() {
         Validation validation = new Validation("create checking 01234567 0.01%");
@@ -30,5 +30,6 @@ public class ValidationTest {
         Validation validation = new Validation("12304 Checking 01234567 0.01%");
         assertFalse(validation.validate());
     }
+
 
 }
