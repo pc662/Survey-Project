@@ -11,11 +11,29 @@ public class Validation {
     }
 
     private boolean validateCommand() {
-        if (splitString[0].equals("Create") || splitString[0].equals("create")) {
+        if (isCommand()) {
+            return validateAccountType();
+        } else {
+            return false;
+        }
+    }
+
+
+    private boolean validateAccountType() {
+        if (isAccountType()) {
             return true;
         } else {
             return false;
         }
+
+    }
+
+    private boolean isCommand() {
+        return splitString[0].equalsIgnoreCase("create");
+    }
+
+    private boolean isAccountType() {
+        return splitString[1].equalsIgnoreCase("CD") || splitString[1].equalsIgnoreCase("checking") || splitString[1].equalsIgnoreCase("saving");
     }
 
 
