@@ -166,6 +166,36 @@ public class DepositValidationTest {
         assertFalse(validation.validate());
     }
 
+    @Test
+    void amount_validate_checking_with_0() {
+        validation = verify("deposit " + checkingID + " 0");
+        assertTrue(validation.validate());
+    }
+
+    @Test
+    void amount_validate_checking_with_one() {
+        validation = verify("deposit " + checkingID + " 1");
+        assertTrue(validation.validate());
+    }
+
+    @Test
+    void amount_validate_checking_with_1000() {
+        validation = verify("deposit " + checkingID + " 1000");
+        assertTrue(validation.validate());
+    }
+
+    @Test
+    void amount_validate_checking_with_999() {
+        validation = verify("deposit " + checkingID + " 999");
+        assertTrue(validation.validate());
+    }
+
+    @Test
+    void amount_validate_checking_with_1001() {
+        validation = verify("deposit " + checkingID + " 1001");
+        assertFalse(validation.validate());
+    }
+
 
     private DepositValidation verify(String s) {
         return new DepositValidation(s, bank);
