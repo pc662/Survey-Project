@@ -7,13 +7,14 @@ public class CreateValidationTest {
 
     Validation validation;
 
-    //Testing the create portion
+    //Overall test for a correct string
     @Test
     void validate_proper_string() {
         validation = getValidation("create checking 01234567 0.01%");
         assertTrue(validation.validate());
     }
 
+    //Testing the create portion
     @Test
     void validate_create_command_case() {
         validation = getValidation("Create checking 01234567 0.01%");
@@ -22,18 +23,24 @@ public class CreateValidationTest {
     }
 
     @Test
+    void validate_create_command_case_insensitive() {
+        validation = getValidation("cReAte checking 01234567 0.01%");
+        assertTrue(validation.validate());
+    }
+
+    @Test
     void validate_incorrect_command_with_letters() {
         validation = getValidation("apple2 Checking 01234567 0.01%");
         assertFalse(validation.validate());
     }
+
+    //Testing the account type portion
 
     @Test
     void validate_incorrect_command_with_numbers() {
         validation = getValidation("12304 Checking 01234567 0.01%");
         assertFalse(validation.validate());
     }
-
-    //Testing the account type portion
 
     @Test
     void validate_checking_account_type() {
@@ -76,6 +83,11 @@ public class CreateValidationTest {
         assertFalse(validation.validate());
     }
 
+    //Test for ID
+    @Test
+    void validate_id_correctness() {
+        //not implemented
+    }
 
     private Validation getValidation(String s) {
         return new Validation(s);
