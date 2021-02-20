@@ -43,7 +43,33 @@ public abstract class Account {
         return APR;
     }
 
-    public abstract boolean isTypeValid(String id, String depositAmount);
+    public boolean isValid(int depositAmount) {
+        if (accountType.equals("checking")) {
+            return validateChecking(depositAmount);
+        } else if (accountType.equals("saving")) {
+            return validateSavings(depositAmount);
+        } else if (accountType.equals("cd")) {
+            return false;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean validateChecking(int depositAmount) {
+        if (depositAmount > 1000 || depositAmount < 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private boolean validateSavings(int depositAmount) {
+        if (depositAmount > 2500 || depositAmount < 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
     private boolean isLessThanZero(int amount) {
         if (amount < 0) {

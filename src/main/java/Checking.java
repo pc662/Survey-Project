@@ -4,8 +4,5 @@ public class Checking extends Account {
         super("checking", identifier, apr);
     }
 
-    @Override
-    public boolean isTypeValid(String id, String depositAmount) {
 
-    }
 }

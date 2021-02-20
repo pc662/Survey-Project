@@ -54,7 +54,7 @@ public class DepositValidation extends Validation {
 
     public boolean validateAccountExists() {
         if (bank.getStoredAccounts().containsKey(splitString[1])) {
-            return true;
+            return validateAccountType();
         } else {
             return false;
         }
@@ -62,7 +62,7 @@ public class DepositValidation extends Validation {
 
     @Override
     public boolean validateAccountType() {
-        return true;
+
     }
 
 
