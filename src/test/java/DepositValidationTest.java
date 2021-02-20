@@ -107,6 +107,12 @@ public class DepositValidationTest {
     }
 
     @Test
+    void ID_validate_nothing_after_account() {
+        validation = verify("deposit 01234567");
+        assertFalse(validation.validate());
+    }
+
+    @Test
     void amount_validate_as_letters() {
         validation = verify("deposit " + checkingID + " abcd");
         assertFalse(validation.validate());
@@ -161,6 +167,12 @@ public class DepositValidationTest {
     }
 
     @Test
+    void amount_validate_savings_with_small_decimal() {
+        validation = verify("deposit " + savingsID + " 0.01");
+        assertTrue(validation.validate());
+    }
+
+    @Test
     void amount_validate_checking_with_negative_one() {
         validation = verify("deposit " + checkingID + " -1");
         assertFalse(validation.validate());
@@ -194,6 +206,24 @@ public class DepositValidationTest {
     void amount_validate_checking_with_1001() {
         validation = verify("deposit " + checkingID + " 1001");
         assertFalse(validation.validate());
+    }
+
+    @Test
+    void amount_validate_checking_with_dollar_sign() {
+        validation = verify("deposit " + checkingID + " $900");
+        assertFalse(validation.validate());
+    }
+
+    @Test
+    void amount_validate_checking_with_decimals() {
+        validation = verify("deposit " + checkingID + " 900.0");
+        assertTrue(validation.validate());
+    }
+
+    @Test
+    void amount_validate_checking_with_small_decimal() {
+        validation = verify("deposit " + checkingID + " 0.01");
+        assertTrue(validation.validate());
     }
 
 
