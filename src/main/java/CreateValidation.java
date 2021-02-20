@@ -2,10 +2,10 @@ public class CreateValidation extends Validation {
 
 
     public CreateValidation(String string, Bank bank) {
-        splitString = string.split(" ", 0);
-        this.bank = bank;
+        super(string, bank);
     }
 
+    @Override
     public boolean validate() {
         return validateCommand();
     }
@@ -22,7 +22,8 @@ public class CreateValidation extends Validation {
     }
 
 
-    private boolean validateAccountType() {
+    @Override
+    public boolean validateAccountType() {
         if (isAccountType()) {
             if (isNotCDVerify()) {
                 return false;
@@ -33,7 +34,8 @@ public class CreateValidation extends Validation {
         }
     }
 
-    private boolean validateID() {
+    @Override
+    public boolean validateID() {
         if (isID()) {
             return isDuplicateOrNot();
         } else {

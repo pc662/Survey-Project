@@ -1,2 +1,4 @@
-public class DepositValidation {
+public class DepositValidation extends Validation {
+
+
 }
