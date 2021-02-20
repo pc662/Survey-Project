@@ -101,6 +101,12 @@ public class DepositValidationTest {
     }
 
     @Test
+    void ID_validate_account_does_not_exist_2() {
+        validation = verify("deposit 10293847 500");
+        assertFalse(validation.validate());
+    }
+
+    @Test
     void amount_validate_as_letters() {
         validation = verify("deposit " + checkingID + " abcd");
         assertFalse(validation.validate());
@@ -153,6 +159,13 @@ public class DepositValidationTest {
         validation = verify("deposit " + savingsID + " 250.01");
         assertTrue(validation.validate());
     }
+
+    @Test
+    void amount_validate_checking_with_negative_one() {
+        validation = verify("deposit " + checkingID + " -1");
+        assertFalse(validation.validate());
+    }
+
 
     private DepositValidation verify(String s) {
         return new DepositValidation(s, bank);
