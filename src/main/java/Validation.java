@@ -1,9 +1,11 @@
 public class Validation {
 
     String[] splitString;
+    Bank bank;
 
-    public Validation(String string) {
+    public Validation(String string, Bank bank) {
         splitString = string.split(" ", 0);
+        this.bank = bank;
     }
 
     public boolean validate() {
@@ -11,7 +13,7 @@ public class Validation {
     }
 
     private boolean validateCommand() {
-        if (isCommand()) {
+        if (isCreateCommand()) {
             return validateAccountType();
         } else {
             return false;
@@ -30,6 +32,14 @@ public class Validation {
 
     private boolean validateID() {
         if (isID()) {
+            return isDuplicateOrNot();
+        } else {
+            return false;
+        }
+    }
+
+    private boolean isDuplicateOrNot() {
+        if (!bank.getStoredAccounts().containsKey(splitString[2])) {
             return true;
         } else {
             return false;
@@ -40,7 +50,7 @@ public class Validation {
         return (splitString[2].matches("[0-9]+")) && (splitString[2].length() == 8);
     }
 
-    private boolean isCommand() {
+    private boolean isCreateCommand() {
         return splitString[0].equalsIgnoreCase("create");
     }
 
