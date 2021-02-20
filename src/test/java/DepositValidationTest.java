@@ -23,6 +23,36 @@ public class DepositValidationTest {
         assertFalse(validation.validate());
     }
 
+    @Test
+    void command_validate_lowercase_deposit_name() {
+        validation = verify("deposit 01234567 1000");
+        assertTrue(validation.validate());
+    }
+
+    @Test
+    void command_validate_case_insensitive_test() {
+        validation = verify("dEpoSiT 01234567 1000");
+        assertTrue(validation.validate());
+    }
+
+    @Test
+    void command_validate_random_letters() {
+        validation = verify("daskdksaldklsadklasjdksk 01234567 1000");
+        assertFalse(validation.validate());
+    }
+
+    @Test
+    void command_validate_numbers_as_command() {
+        validation = verify("01234567 01234567 1000");
+        assertFalse(validation.validate());
+    }
+
+    @Test
+    void command_validate_symbols_as_command() {
+        validation = verify("-+=?! 01234567 1000");
+        assertFalse(validation.validate());
+    }
+
 
     private DepositValidation verify(String s) {
         return new DepositValidation(s, bank);
