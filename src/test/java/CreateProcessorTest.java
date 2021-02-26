@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,85 +20,90 @@ public class CreateProcessorTest {
     double APR = 0.1;
     double cdStartAmount = 100;
 
-    Bank bank = new Bank();
+    Bank bank;
+
+    @BeforeEach
+    void setUp() {
+        bank = new Bank();
+    }
 
 
     @Test
     void create_checking_type() {
-        process(bank, checkingAccountCommand);
+        process(checkingAccountCommand);
         assertEquals(getAccountType(checkingID), checkingType);
     }
 
     @Test
     void create_checking_ID() {
-        process(bank, checkingAccountCommand);
+        process(checkingAccountCommand);
         assertEquals(getAccountID(checkingID), checkingID);
     }
 
     @Test
     void create_checking_APR() {
-        process(bank, checkingAccountCommand);
+        process(checkingAccountCommand);
         assertEquals(getAccountAPR(checkingID), APR);
     }
 
     @Test
     void create_checking_balance() {
-        process(bank, checkingAccountCommand);
+        process(checkingAccountCommand);
         assertEquals(getAccountBalance(checkingID), 0);
     }
 
     @Test
     void create_checking_balance_with_decimal() {
-        process(bank, checkingAccountCommand);
+        process(checkingAccountCommand);
         assertEquals(getAccountBalance(checkingID), 0.00);
     }
 
     @Test
     void create_savings_type() {
-        process(bank, savingAccountCommand);
+        process(savingAccountCommand);
         assertEquals(getAccountType(savingID), savingType);
     }
 
     @Test
     void create_savings_ID() {
-        process(bank, savingAccountCommand);
+        process(savingAccountCommand);
         assertEquals(getAccountID(savingID), savingID);
     }
 
     @Test
     void create_savings_APR() {
-        process(bank, savingAccountCommand);
+        process(savingAccountCommand);
         assertEquals(getAccountAPR(savingID), APR);
     }
 
     @Test
     void create_savings_balance() {
-        process(bank, savingAccountCommand);
+        process(savingAccountCommand);
         assertEquals(getAccountBalance(savingID), 0);
     }
 
 
     @Test
     void create_cd_type() {
-        process(bank, cdAccountCommand);
+        process(cdAccountCommand);
         assertEquals(getAccountType(cdID), cdType);
     }
 
     @Test
     void create_cd_ID() {
-        process(bank, cdAccountCommand);
+        process(cdAccountCommand);
         assertEquals(getAccountID(cdID), cdID);
     }
 
     @Test
     void create_cd_APR() {
-        process(bank, cdAccountCommand);
+        process(cdAccountCommand);
         assertEquals(getAccountAPR(cdID), APR);
     }
 
     @Test
     void create_cd_balance() {
-        process(bank, cdAccountCommand);
+        process(cdAccountCommand);
         assertEquals(getAccountBalance(cdID), cdStartAmount);
     }
 
@@ -110,9 +116,9 @@ public class CreateProcessorTest {
         return bank.getAccount(string);
     }
 
-    private void process(Bank bank, String checkingAccountCommand) {
-        CommandProcessor commandProcessor = new CommandProcessor(checkingAccountCommand, bank);
-        commandProcessor.process();
+    private void process(String checkingAccountCommand) {
+        CommandProcessor commandProcessor = new CommandProcessor(bank);
+        commandProcessor.process(checkingAccountCommand);
     }
 
     private String getAccountID(String ID) {

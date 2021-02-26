@@ -5,26 +5,18 @@ public class CreateProcessor extends CommandProcessor {
     private double accountAPR;
     private double accountCdStartAmount;
 
-    CreateProcessor(String command, Bank bank) {
-        super(command, bank);
-        accountType = parsedCommand[1];
-        accountID = parsedCommand[2];
-        accountAPR = Double.parseDouble(parsedCommand[3]);
-        if (isCd(accountType)) {
-            accountCdStartAmount = Double.parseDouble(parsedCommand[4]);
-        }
+    CreateProcessor(Bank bank) {
+        super(bank);
     }
 
     private boolean isCd(String accountType) {
-        if (accountType.equalsIgnoreCase("cd")) {
-            return true;
-        } else {
-            return false;
-        }
+        return accountType.equalsIgnoreCase("cd");
     }
 
-    @Override
-    public void process() {
+
+    public void process(String[] parsedCommand) {
+        setValuesOfCommand(parsedCommand);
+
         if (accountType.equalsIgnoreCase("checking")) {
             Checking checkingAccount = new Checking(accountID, accountAPR);
             bank.addAccount(checkingAccount);
@@ -34,6 +26,15 @@ public class CreateProcessor extends CommandProcessor {
         } else if (accountType.equalsIgnoreCase("cd")) {
             CertificateOfDeposit cdAccount = new CertificateOfDeposit(accountID, accountAPR, accountCdStartAmount);
             bank.addAccount(cdAccount);
+        }
+    }
+
+    private void setValuesOfCommand(String[] parsedCommand) {
+        accountType = parsedCommand[1];
+        accountID = parsedCommand[2];
+        accountAPR = Double.parseDouble(parsedCommand[3]);
+        if (isCd(accountType)) {
+            accountCdStartAmount = Double.parseDouble(parsedCommand[4]);
         }
     }
 }

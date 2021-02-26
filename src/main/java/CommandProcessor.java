@@ -4,17 +4,17 @@ public class CommandProcessor {
     private String command;
 
 
-    public CommandProcessor(String command, Bank bank) {
-        this.command = command;
-        this.parsedCommand = command.split(" ", 0);
+    public CommandProcessor(Bank bank) {
         this.bank = bank;
     }
 
-    public void process() {
+    public void process(String command) {
+        this.command = command;
+        this.parsedCommand = command.split(" ", 0);
         if (parsedCommand[0].equalsIgnoreCase("create")) {
-            new CreateProcessor(command, bank).process();
+            new CreateProcessor(bank).process(parsedCommand);
         } else if (parsedCommand[0].equalsIgnoreCase("deposit")) {
-            new DepositProcessor(command, bank).process();
+            new DepositProcessor(bank).process(parsedCommand);
         }
 
     }

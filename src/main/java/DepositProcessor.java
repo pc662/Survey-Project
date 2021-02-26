@@ -3,14 +3,14 @@ public class DepositProcessor extends CommandProcessor {
     private String accountID;
     private double depositAmount;
 
-    DepositProcessor(String command, Bank bank) {
-        super(command, bank);
-        accountID = parsedCommand[1];
-        depositAmount = Double.parseDouble(parsedCommand[2]);
+    DepositProcessor(Bank bank) {
+        super(bank);
     }
 
-    @Override
-    public void process() {
+
+    public void process(String[] parsedCommand) {
+        accountID = parsedCommand[1];
+        depositAmount = Double.parseDouble(parsedCommand[2]);
         bank.getAccount(accountID).deposit(depositAmount);
     }
 

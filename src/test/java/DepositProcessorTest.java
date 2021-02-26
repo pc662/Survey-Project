@@ -93,8 +93,8 @@ public class DepositProcessorTest {
     }
 
     private void process(String string) {
-        CommandProcessor command = new CommandProcessor(string, bank);
-        command.process();
+        CommandProcessor command = new CommandProcessor(bank);
+        command.process(string);
     }
 
 
