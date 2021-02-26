@@ -8,15 +8,24 @@ public abstract class Validation {
     String ID;
     double APR;
     double cdMoney;
+    String originalString;
 
 
     public Validation(String string, Bank bank) {
+        originalString = string;
         splitString = string.split(" ", 0);
         stringLength = splitString.length;
         this.bank = bank;
     }
 
-    public abstract boolean validate();
+    public boolean validate() {
+        if (splitString[0].equalsIgnoreCase("create")) {
+            new CreateValidation(originalString, bank).validate();
+        } else if (splitString[0].equalsIgnoreCase("deposit")) {
+            new DepositValidation(originalString, bank).validate();
+        }
+        return false;
+    }
 
     public abstract boolean validateCommand();
 
