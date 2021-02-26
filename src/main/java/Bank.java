@@ -20,4 +20,10 @@ public class Bank {
         return (Account) accounts.get(ID);
     }
 
+    public boolean isAccountDepositAmountValid(String id, double depositAmount) {
+        Account account = (Account) accounts.get(id);
+        return account.isValid(depositAmount);
+    }
+
+
 }

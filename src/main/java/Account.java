@@ -39,15 +39,33 @@ public abstract class Account {
         }
     }
 
-    private boolean isLessThanZero(int amount) {
-        if (amount < 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public double getAPR() {
         return APR;
     }
+
+    public boolean isValid(double depositAmount) {
+        switch (accountType) {
+            case "checking":
+                return validateChecking(depositAmount);
+            case "saving":
+                return validateSavings(depositAmount);
+            case "cd":
+                return false;
+            default:
+                return false;
+        }
+    }
+
+    private boolean validateChecking(double depositAmount) {
+        return !(depositAmount > 1000) && !(depositAmount < 0);
+    }
+
+    private boolean validateSavings(double depositAmount) {
+        return !(depositAmount > 2500) && !(depositAmount < 0);
+    }
+
+    private boolean isLessThanZero(int amount) {
+        return amount < 0;
+    }
+
 }

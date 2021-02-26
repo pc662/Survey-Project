@@ -8,7 +8,7 @@ public class SavingTest {
     public static final String ZERO_IDENTIFIER = "00000000";
     public static final double APR = 0.01;
 
-    Account saving = new Saving(SAVING, ZERO_IDENTIFIER, APR);
+    Account saving = new Saving(ZERO_IDENTIFIER, APR);
 
     @Test
     void saving_account_type() {
