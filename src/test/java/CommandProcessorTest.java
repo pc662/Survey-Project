@@ -17,6 +17,7 @@ public class CommandProcessorTest {
     String cdID = "00000000";
 
     double APR = 0.1;
+    double cdStartAmount = 100;
 
     Bank bank = new Bank();
 
@@ -86,6 +87,18 @@ public class CommandProcessorTest {
     void create_cd_ID() {
         process(bank, cdAccountCommand);
         assertEquals(getAccountID(cdID), cdID);
+    }
+
+    @Test
+    void create_cd_APR() {
+        process(bank, cdAccountCommand);
+        assertEquals(getAccountAPR(cdID), APR);
+    }
+
+    @Test
+    void create_cd_balance() {
+        process(bank, cdAccountCommand);
+        assertEquals(getAccountBalance(cdID), cdStartAmount);
     }
 
 
