@@ -1,6 +1,9 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class CommandStorageTest {
     String invalidCommand = "create";
     String invalidCommand2 = "deposit";
@@ -15,6 +18,7 @@ public class CommandStorageTest {
     Validation validation;
     CommandStorage storage;
 
+
     @BeforeEach
     void setUp() {
         bank = new Bank();
@@ -23,10 +27,20 @@ public class CommandStorageTest {
     }
 
     @Test
-    void storeInvalidCommand() {
-        if (validation.validate(invalidCommand)) {
-        } else {
-        }
+    void store_invalid_command() {
+        checkValid(invalidCommand);
+        assertEquals(invalidCommand, storage.getInvalidCommands().get(0));
+    }
 
+    @Test
+    void do_not_store_valid_command() {
+        checkValid(validCommand);
+        assertTrue(storage.getInvalidCommands().isEmpty());
+    }
+
+    private void checkValid(String string) {
+        if (!validation.validate(string)) {
+            storage.storeInvalidCommand(string);
+        }
     }
 }
