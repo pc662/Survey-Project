@@ -33,6 +33,7 @@ public class CreateProcessor extends CommandProcessor {
             bank.addAccount(savingAccount);
         } else if (accountType.equalsIgnoreCase("cd")) {
             CertificateOfDeposit cdAccount = new CertificateOfDeposit(accountID, accountAPR, accountCdStartAmount);
+            bank.addAccount(cdAccount);
         }
     }
 }

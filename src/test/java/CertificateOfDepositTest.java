@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CertificateOfDepositTest {
 
-    public static final String CD = "CD";
+    public static final String CD = "cd";
     public static final String ZERO_IDENTIFIER = "00000000";
     public static final double APR = 0.01;
     public static final int START_AMOUNT = 1000;
