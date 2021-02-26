@@ -1,4 +1,4 @@
-public abstract class Validation {
+public class Validation {
 
     String[] splitString;
     int stringLength;
@@ -20,18 +20,13 @@ public abstract class Validation {
 
     public boolean validate() {
         if (splitString[0].equalsIgnoreCase("create")) {
-            new CreateValidation(originalString, bank).validate();
+            return new CreateValidation(originalString, bank).validate();
         } else if (splitString[0].equalsIgnoreCase("deposit")) {
-            new DepositValidation(originalString, bank).validate();
+            return new DepositValidation(originalString, bank).validate();
+        } else {
+            return false;
         }
-        return false;
     }
-
-    public abstract boolean validateCommand();
-
-    public abstract boolean validateID();
-
-    public abstract boolean validateAccountType();
 
 
 }

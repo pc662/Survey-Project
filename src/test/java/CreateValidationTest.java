@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CreateValidationTest {
 
-    CreateValidation validation;
+    Validation validation;
     Bank bank = new Bank();
 
     //Overall test for a correct string
@@ -76,9 +76,9 @@ public class CreateValidationTest {
 
     @Test
     void account_type_validate_case_insensitive_for_all_account_types() {
-        CreateValidation checkingValidation = verify("create cHecKing 01234567 0.01");
-        CreateValidation savingsValidation = verify("create sAviNgs 01234567 0.01");
-        CreateValidation cdValidation = verify("create cD 01234567 0.01 1000");
+        Validation checkingValidation = verify("create cHecKing 01234567 0.01");
+        Validation savingsValidation = verify("create sAviNgs 01234567 0.01");
+        Validation cdValidation = verify("create cD 01234567 0.01 1000");
         assertTrue(checkingValidation.validate());
         assertTrue(savingsValidation.validate());
         assertTrue(cdValidation.validate());
@@ -362,8 +362,8 @@ public class CreateValidationTest {
         assertFalse(validation.validate());
     }
 
-    private CreateValidation verify(String s) {
-        return new CreateValidation(s, bank);
+    private Validation verify(String s) {
+        return new Validation(s, bank);
     }
 
 

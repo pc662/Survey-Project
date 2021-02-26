@@ -10,7 +10,7 @@ public class DepositValidationTest {
     public static final String checkingID = "01234567";
     public static final String cdID = "23456789";
 
-    DepositValidation validation;
+    Validation validation;
     Bank bank = new Bank();
 
     Checking checking = new Checking(checkingID, 0.01);
@@ -259,8 +259,8 @@ public class DepositValidationTest {
         assertFalse(validation.validate());
     }
 
-    private DepositValidation verify(String s) {
-        return new DepositValidation(s, bank);
+    private Validation verify(String s) {
+        return new Validation(s, bank);
     }
 
 

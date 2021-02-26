@@ -5,12 +5,13 @@ public class CreateValidation extends Validation {
         super(string, bank);
     }
 
+
     @Override
     public boolean validate() {
         return validateCommand();
     }
 
-    @Override
+
     public boolean validateCommand() {
         if (isCreateCommand()) {
             if (checkLength()) {
@@ -35,7 +36,6 @@ public class CreateValidation extends Validation {
     }
 
 
-    @Override
     public boolean validateAccountType() {
         if (isAccountType()) {
             if (isNotCDVerify()) {
@@ -61,7 +61,7 @@ public class CreateValidation extends Validation {
         return splitString[1].equalsIgnoreCase("CD") || splitString[1].equalsIgnoreCase("checking") || splitString[1].equalsIgnoreCase("savings");
     }
 
-    @Override
+
     public boolean validateID() {
         if (isID()) {
             return isDuplicateOrNot();
