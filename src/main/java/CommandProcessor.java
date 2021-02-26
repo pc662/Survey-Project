@@ -13,7 +13,8 @@ public class CommandProcessor {
     public void process() {
         if (parsedCommand[0].equalsIgnoreCase("create")) {
             new CreateProcessor(command, bank).process();
-        } else {
+        } else if (parsedCommand[0].equalsIgnoreCase("deposit")) {
+            new DepositProcessor(command, bank).process();
         }
 
     }

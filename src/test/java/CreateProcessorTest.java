@@ -2,7 +2,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class CommandProcessorTest {
+public class CreateProcessorTest {
 
     String checkingAccountCommand = "create checking 01234567 0.1";
     String savingAccountCommand = "create saving 12345678 0.1";
