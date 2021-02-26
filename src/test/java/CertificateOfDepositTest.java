@@ -44,7 +44,7 @@ public class CertificateOfDepositTest {
         return account.getID();
     }
 
-    private int accountBalance(Account account) {
+    private double accountBalance(Account account) {
         return account.getBalance();
     }
 
