@@ -1,6 +1,6 @@
 public class CommandProcessor {
     protected String[] parsedCommand;
-    private Bank bank;
+    protected Bank bank;
     private String command;
 
 
@@ -12,7 +12,7 @@ public class CommandProcessor {
 
     public void process() {
         if (parsedCommand[0].equalsIgnoreCase("create")) {
-            new CreateProcessor(command, bank);
+            new CreateProcessor(command, bank).process();
         } else {
         }
 

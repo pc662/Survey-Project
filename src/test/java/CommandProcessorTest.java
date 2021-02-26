@@ -11,7 +11,7 @@ public class CommandProcessorTest {
         String checkingAccountCommand = "create checking 01234567 1.0";
         CommandProcessor commandProcessor = new CommandProcessor(checkingAccountCommand, bank);
         commandProcessor.process();
-        assertEquals(bank.getAccount("0000000").getAccountType(), checkingType);
+        assertEquals(bank.getAccount("01234567").getAccountType(), checkingType);
     }
 
 
