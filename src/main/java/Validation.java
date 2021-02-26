@@ -19,6 +19,10 @@ public class Validation {
     }
 
     public boolean validate() {
+        return checkValidationType();
+    }
+
+    private boolean checkValidationType() {
         if (splitString[0].equalsIgnoreCase("create")) {
             return new CreateValidation(originalString, bank).validate();
         } else if (splitString[0].equalsIgnoreCase("deposit")) {
