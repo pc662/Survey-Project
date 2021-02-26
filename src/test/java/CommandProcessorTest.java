@@ -46,16 +46,46 @@ public class CommandProcessorTest {
     }
 
     @Test
-    void create_savings() {
+    void create_checking_balance_with_decimal() {
+        process(bank, checkingAccountCommand);
+        assertEquals(getAccountBalance(checkingID), 0.00);
+    }
+
+    @Test
+    void create_savings_type() {
         process(bank, savingAccountCommand);
         assertEquals(getAccountType(savingID), savingType);
     }
 
+    @Test
+    void create_savings_ID() {
+        process(bank, savingAccountCommand);
+        assertEquals(getAccountID(savingID), savingID);
+    }
 
     @Test
-    void create_cd() {
+    void create_savings_APR() {
+        process(bank, savingAccountCommand);
+        assertEquals(getAccountAPR(savingID), APR);
+    }
+
+    @Test
+    void create_savings_balance() {
+        process(bank, savingAccountCommand);
+        assertEquals(getAccountBalance(savingID), 0);
+    }
+
+
+    @Test
+    void create_cd_type() {
         process(bank, cdAccountCommand);
         assertEquals(getAccountType(cdID), cdType);
+    }
+
+    @Test
+    void create_cd_ID() {
+        process(bank, cdAccountCommand);
+        assertEquals(getAccountID(cdID), cdID);
     }
 
 
