@@ -1,13 +1,16 @@
 public class CreateValidation extends Validation {
 
 
-    public CreateValidation(String string, Bank bank) {
-        super(string, bank);
+    public CreateValidation(Bank bank) {
+        super(bank);
     }
 
 
     @Override
-    public boolean validate() {
+    public boolean validate(String command) {
+        originalString = command;
+        splitString = command.split(" ", 0);
+        stringLength = splitString.length;
         return validateCommand();
     }
 

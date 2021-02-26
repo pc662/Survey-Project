@@ -1,8 +1,8 @@
 public class Validation {
 
+    protected Bank bank;
     String[] splitString;
     int stringLength;
-    Bank bank;
     String command;
     String accountType;
     String ID;
@@ -11,22 +11,22 @@ public class Validation {
     String originalString;
 
 
-    public Validation(String string, Bank bank) {
-        originalString = string;
-        splitString = string.split(" ", 0);
-        stringLength = splitString.length;
+    public Validation(Bank bank) {
         this.bank = bank;
     }
 
-    public boolean validate() {
+    public boolean validate(String string) {
+        originalString = string;
+        splitString = string.split(" ", 0);
+        stringLength = splitString.length;
         return checkValidationType();
     }
 
     private boolean checkValidationType() {
         if (splitString[0].equalsIgnoreCase("create")) {
-            return new CreateValidation(originalString, bank).validate();
+            return new CreateValidation(bank).validate(originalString);
         } else if (splitString[0].equalsIgnoreCase("deposit")) {
-            return new DepositValidation(originalString, bank).validate();
+            return new DepositValidation(bank).validate(originalString);
         } else {
             return false;
         }
