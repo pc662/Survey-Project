@@ -59,6 +59,16 @@ public class MasterControlTest {
         assertSingleCommand(actual, "create checking 12345678 1.0");
     }
 
+    @Test
+    void invalid_to_deposit_into_cd() {
+        input.add("create cd 12345678 1.0 1000");
+        input.add("deposit 12345678 100");
+
+        List<String> actual = masterControl.start(input);
+
+        assertSingleCommand(actual, "deposit 12345678 100");
+    }
+
     private void assertSingleCommand(List<String> actual, String s) {
         assertEquals(1, actual.size());
         assertEquals(s, actual.get(0));
