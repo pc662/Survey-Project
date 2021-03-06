@@ -10,7 +10,7 @@ public class BankTest {
 
 
     public static final double APR = 0.01;
-    public static final int startAmount = 1000;
+    public static final double startAmount = 1000;
     public static final String checkingID = "09283745";
     public static final String savingID = "39405948";
     public static final String cdID = "39203940";
@@ -164,7 +164,7 @@ public class BankTest {
     }
 
 
-    public int getBalance(String savingID) {
+    public double getBalance(String savingID) {
         return bank.getAccount(savingID).getBalance();
     }
 

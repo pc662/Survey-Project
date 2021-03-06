@@ -1,15 +1,19 @@
 public class DepositValidation extends Validation {
 
-    public DepositValidation(String string, Bank bank) {
-        super(string, bank);
+    public DepositValidation(Bank bank) {
+        super(bank);
     }
 
+
     @Override
-    public boolean validate() {
+    public boolean validate(String command) {
+        originalString = command;
+        splitString = command.split(" ", 0);
+        stringLength = splitString.length;
         return validateCommand();
     }
 
-    @Override
+
     public boolean validateCommand() {
         if (splitString[0].equalsIgnoreCase("deposit")) {
             return checkLength();
@@ -26,7 +30,7 @@ public class DepositValidation extends Validation {
         }
     }
 
-    @Override
+
     public boolean validateID() {
         if (isInt(splitString[1])) {
             return isEightDigits();
@@ -60,7 +64,7 @@ public class DepositValidation extends Validation {
         }
     }
 
-    @Override
+
     public boolean validateAccountType() {
         try {
             double depositAmount = Double.parseDouble(splitString[2]);

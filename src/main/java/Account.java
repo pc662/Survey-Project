@@ -1,6 +1,6 @@
 public abstract class Account {
 
-    private int balance;
+    private double balance;
     private String accountType;
     private String ID;
     private double APR;
@@ -20,19 +20,19 @@ public abstract class Account {
         return ID;
     }
 
-    public int getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(int amount) {
+    public void setBalance(double amount) {
         balance = amount;
     }
 
-    public void deposit(int amount) {
+    public void deposit(double amount) {
         balance += amount;
     }
 
-    public void withdraw(int amount) {
+    public void withdraw(double amount) {
         balance -= amount;
         if (isLessThanZero(balance)) {
             balance = 0;
@@ -49,8 +49,6 @@ public abstract class Account {
                 return validateChecking(depositAmount);
             case "saving":
                 return validateSavings(depositAmount);
-            case "cd":
-                return false;
             default:
                 return false;
         }
@@ -64,7 +62,7 @@ public abstract class Account {
         return !(depositAmount > 2500) && !(depositAmount < 0);
     }
 
-    private boolean isLessThanZero(int amount) {
+    private boolean isLessThanZero(double amount) {
         return amount < 0;
     }
 

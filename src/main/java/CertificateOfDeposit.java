@@ -1,7 +1,7 @@
 public class CertificateOfDeposit extends Account {
 
-    public CertificateOfDeposit(String identifier, double apr, int startAmount) {
-        super("CD", identifier, apr);
+    public CertificateOfDeposit(String identifier, double apr, double startAmount) {
+        super("cd", identifier, apr);
         this.setBalance(startAmount);
     }
 }
