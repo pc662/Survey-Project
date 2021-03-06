@@ -27,6 +27,11 @@ public class CommandStorageTest {
     }
 
     @Test
+    void check_empty_list() {
+        assertTrue(storage.getInvalidCommands().isEmpty());
+    }
+
+    @Test
     void store_invalid_command() {
         checkValid(invalidCommand);
         assertEquals(invalidCommand, storage.getInvalidCommands().get(0));
