@@ -1,3 +1,5 @@
+package banking;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -32,7 +34,7 @@ public class CreateValidationTest {
     @Test
     void command_validate_incorrect_command_with_letters() {
         validation = verify();
-        assertFalse(validation.validate("apple2 Checking 01234567 0.01"));
+        assertFalse(validation.validate("apple2 banking.Checking 01234567 0.01"));
     }
 
     @Test
@@ -44,13 +46,13 @@ public class CreateValidationTest {
     @Test
     void command_validate_more_than_five() {
         validation = verify();
-        assertFalse(validation.validate("create Checking 01234567 0.01 0.01 0.01"));
+        assertFalse(validation.validate("create banking.Checking 01234567 0.01 0.01 0.01"));
     }
 
     @Test
     void command_validate_incorrect_command_with_numbers() {
         validation = verify();
-        assertFalse(validation.validate("12304 Checking 01234567 0.01"));
+        assertFalse(validation.validate("12304 banking.Checking 01234567 0.01"));
     }
 
     //Testing the account type portion

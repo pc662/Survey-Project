@@ -1,37 +1,40 @@
+package banking;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class CheckingTest {
+public class CertificateOfDepositTest {
 
-    public static final String CHECKING = "checking";
+    public static final String CD = "cd";
     public static final String ZERO_IDENTIFIER = "00000000";
     public static final double APR = 0.01;
+    public static final int START_AMOUNT = 1000;
 
-    Account checking = new Checking(ZERO_IDENTIFIER, APR);
+    Account cd = new CertificateOfDeposit(ZERO_IDENTIFIER, APR, START_AMOUNT);
 
     @Test
-    void checking_account_type() {
-        assertEquals(accountType(checking), CHECKING);
+    void CD_account_type() {
+        assertEquals(accountType(cd), CD);
     }
 
     @Test
-    void checking_account_id() {
-        assertEquals(accountID(checking), ZERO_IDENTIFIER);
+    void cd_account_id() {
+        assertEquals(accountID(cd), ZERO_IDENTIFIER);
     }
 
     @Test
-    void checking_account_balance() {
-        assertEquals(accountBalance(checking), 0);
+    void check_start_amount() {
+        assertEquals(accountBalance(cd), START_AMOUNT);
     }
 
     @Test
-    void checking_account_APR() {
+    void cd_account_APR() {
         assertEquals(APR, getApr());
     }
 
     private double getApr() {
-        return checking.getAPR();
+        return cd.getAPR();
     }
 
 
@@ -46,4 +49,5 @@ public class CheckingTest {
     private double accountBalance(Account account) {
         return account.getBalance();
     }
+
 }
