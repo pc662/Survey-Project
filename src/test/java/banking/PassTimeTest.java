@@ -111,6 +111,13 @@ public class PassTimeTest {
     }
 
     @Test
+    void pass_46_months_checking_with_5000_dollars() {
+        bank.getAccount(checkingID).deposit(5000);
+        bank.passTime(46);
+        assertEquals(5116.303288710226, bank.getAccount(checkingID).getBalance());
+    }
+
+    @Test
     void pass_one_month_cd_with_5000_dollars() {
         bank.addAccount(cd);
         bank.getAccount(cdID).deposit(4000);
@@ -135,10 +142,29 @@ public class PassTimeTest {
     }
 
     @Test
+    void pass_46_months_cd_with_5000_dollars() {
+        bank.addAccount(cd);
+        bank.getAccount(cdID).deposit(4000);
+        bank.passTime(46);
+        assertEquals(5481.320477152612, bank.getAccount(cdID).getBalance());
+    }
+
+    @Test
     void pass_one_month_checking_with_0_dollars() {
         bank.passTime(1);
         assertTrue(bank.getStoredAccounts().isEmpty());
+    }
 
+    @Test
+    void pass_ten_months_checking_with_0_dollars() {
+        bank.passTime(10);
+        assertTrue(bank.getStoredAccounts().isEmpty());
+    }
+
+    @Test
+    void pass_sixty_months_checking_with_0_dollars() {
+        bank.passTime(60);
+        assertTrue(bank.getStoredAccounts().isEmpty());
     }
 
 
