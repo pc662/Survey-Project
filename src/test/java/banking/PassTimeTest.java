@@ -56,6 +56,35 @@ public class PassTimeTest {
     }
 
     @Test
+    void pass_four_months_checking_with_5000_dollars() {
+        bank.getAccount(checkingID).deposit(5000);
+        bank.passTime(4);
+        assertEquals(5010, bank.getAccount(checkingID).getBalance());
+    }
+
+    @Test
+    void pass_five_months_checking_with_5000_dollars() {
+        bank.getAccount(checkingID).deposit(5000);
+        bank.passTime(5);
+        assertEquals(5012.5, bank.getAccount(checkingID).getBalance());
+    }
+
+    @Test
+    void pass_six_months_checking_with_5000_dollars() {
+        bank.getAccount(checkingID).deposit(5000);
+        bank.passTime(6);
+        assertEquals(5015, bank.getAccount(checkingID).getBalance());
+    }
+
+    @Test
+    void pass_seven_months_checking_with_5000_dollars() {
+        bank.getAccount(checkingID).deposit(5000);
+        bank.passTime(7);
+        assertEquals(5017.50, bank.getAccount(checkingID).getBalance());
+    }
+
+
+    @Test
     void pass_twelve_months_checking_with_5000_dollars() {
         bank.getAccount(checkingID).deposit(5000);
         bank.passTime(12);

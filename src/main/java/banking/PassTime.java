@@ -41,12 +41,14 @@ public class PassTime {
             newAPR = APR / 100;
             newAPR = newAPR / 12;
             extraBalance = newAPR * balance;
+            DecimalFormat decimalFormat = new DecimalFormat("#.##");
+            decimalFormat.setRoundingMode(RoundingMode.FLOOR);
+            extraBalance = Double.parseDouble(decimalFormat.format(extraBalance));
             balance = balance + extraBalance;
             account.setBalance(balance);
         }
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
         decimalFormat.setRoundingMode(RoundingMode.FLOOR);
-        decimalFormat.format(account.getBalance());
         balance = Double.parseDouble(decimalFormat.format(account.getBalance()));
 
         account.setBalance(balance);
