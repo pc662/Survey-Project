@@ -29,6 +29,8 @@ public class Validation {
             return new CreateValidation(bank).validate(originalString);
         } else if (splitString[0].equalsIgnoreCase("deposit")) {
             return new DepositValidation(bank).validate(originalString);
+        } else if (splitString[0].equalsIgnoreCase("pass")) {
+            return new PassTimeValidation(bank).validate(originalString);
         } else {
             return false;
         }
