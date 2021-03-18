@@ -35,6 +35,14 @@ public class PassTimeProcessorTest {
         assertTrue(bank.getStoredAccounts().isEmpty());
     }
 
+    @Test
+    void process_pass_time_for_saving() {
+        bank.addAccount(saving);
+        process("pass 1");
+        assertTrue(bank.getStoredAccounts().isEmpty());
+    }
+
+
     private void process(String passTimeCommand) {
         CommandProcessor commandProcessor = new CommandProcessor(bank);
         commandProcessor.process(passTimeCommand);
