@@ -87,6 +87,46 @@ public class PassTimeValidationTest {
         assertTrue(validation.validate("pass 3"));
     }
 
+    @Test
+    void pass_time_with_59() {
+        assertTrue(validation.validate("pass 59"));
+    }
+
+    @Test
+    void pass_time_with_60() {
+        assertTrue(validation.validate("pass 60"));
+    }
+
+    @Test
+    void pass_time_with_43() {
+        assertTrue(validation.validate("pass 43"));
+    }
+
+    @Test
+    void pass_time_with_letters() {
+        assertFalse(validation.validate("pass absce"));
+    }
+
+    @Test
+    void pass_time_with_no_arguments() {
+        assertFalse(validation.validate("pass"));
+    }
+
+    @Test
+    void pass_time_with_decimals() {
+        assertFalse(validation.validate("pass 2.0"));
+    }
+
+    @Test
+    void pass_time_with_43_decimal() {
+        assertFalse(validation.validate("pass 43.0"));
+    }
+
+    @Test
+    void pass_time_with_only_decimal_at_end() {
+        assertFalse(validation.validate("pass 2."));
+    }
+
     private Validation verify() {
         return new Validation(bank);
     }
