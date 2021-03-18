@@ -3,13 +3,15 @@ package banking;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class PassTimeTest {
 
     public static final String checkingID = "09283745";
     public static final String savingID = "39405948";
     public static final String cdID = "39203940";
 
-    public static final double APR = 0.01;
+    public static final double APR = 0.1;
     public static final double startAmount = 1000;
 
     Account checking = new Checking(checkingID, APR);
@@ -27,7 +29,9 @@ public class PassTimeTest {
     }
 
     @Test
-    void pass_one_month() {
+    void pass_one_month_checking_with_zero_dollars() {
+        bank.passTime(1);
+        assertEquals(bank.getAccount(checkingID).getBalance(), 0);
 
     }
 }

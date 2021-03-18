@@ -28,4 +28,7 @@ public class Bank {
     }
 
 
+    public void passTime(int i) {
+        new PassTime().passTime(i);
+    }
 }
