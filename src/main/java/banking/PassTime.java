@@ -17,33 +17,30 @@ public class PassTime {
     }
 
     public void passTime(int months) {
-        for (Map.Entry<String, Object> entry : passedAccounts.entrySet()) {
-            account = (Account) passedAccounts.get(entry.getKey());
-            if (account.getAccountType().equalsIgnoreCase("cd")) {
-                calculateCdAPR(account, months);
-            } else {
-                calculateAPR(account, months);
+        for (int i = 0; i < months; i++) {
+            for (Map.Entry<String, Object> entry : passedAccounts.entrySet()) {
+                account = (Account) passedAccounts.get(entry.getKey());
+                if (account.getAccountType().equalsIgnoreCase("cd")) {
+                    calculateCdAPR(account);
+                } else {
+                    calculateAPR(account);
+                }
             }
         }
     }
 
-    private void calculateCdAPR(Account account, int months) {
-        for (int i = 0; i < months; i++) {
-            setUpCalculations(account);
-            extraBalance = 4 * extraBalance;
-            balance = balance + extraBalance;
-            account.setBalance(balance);
-        }
+    private void calculateCdAPR(Account account) {
+        setUpCalculations(account);
+        extraBalance = 4 * extraBalance;
+        balance = balance + extraBalance;
         account.setBalance(balance);
+
     }
 
 
-    private void calculateAPR(Account account, int months) {
-        for (int i = 0; i < months; i++) {
-            setUpCalculations(account);
-            balance = balance + extraBalance;
-            account.setBalance(balance);
-        }
+    private void calculateAPR(Account account) {
+        setUpCalculations(account);
+        balance = balance + extraBalance;
         account.setBalance(balance);
     }
 
