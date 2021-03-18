@@ -29,6 +29,6 @@ public class Bank {
 
 
     public void passTime(int i) {
-        new PassTime().passTime(i);
+        new PassTime(accounts).passTime(i);
     }
 }

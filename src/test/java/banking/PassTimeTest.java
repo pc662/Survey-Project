@@ -11,7 +11,7 @@ public class PassTimeTest {
     public static final String savingID = "39405948";
     public static final String cdID = "39203940";
 
-    public static final double APR = 0.1;
+    public static final double APR = 0.6;
     public static final double startAmount = 1000;
 
     Account checking = new Checking(checkingID, APR);
@@ -31,7 +31,34 @@ public class PassTimeTest {
     @Test
     void pass_one_month_checking_with_zero_dollars() {
         bank.passTime(1);
-        assertEquals(bank.getAccount(checkingID).getBalance(), 0);
+        assertEquals(0, bank.getAccount(checkingID).getBalance());
+    }
 
+    @Test
+    void pass_one_month_checking_with_5000_dollars() {
+        bank.getAccount(checkingID).deposit(5000);
+        bank.passTime(1);
+        assertEquals(5002.50, bank.getAccount(checkingID).getBalance());
+    }
+
+    @Test
+    void pass_two_months_checking_with_5000_dollars() {
+        bank.getAccount(checkingID).deposit(5000);
+        bank.passTime(2);
+        assertEquals(5005, bank.getAccount(checkingID).getBalance());
+    }
+
+    @Test
+    void pass_three_months_checking_with_5000_dollars() {
+        bank.getAccount(checkingID).deposit(5000);
+        bank.passTime(3);
+        assertEquals(5007.50, bank.getAccount(checkingID).getBalance());
+    }
+
+    @Test
+    void pass_twelve_months_checking_with_5000_dollars() {
+        bank.getAccount(checkingID).deposit(5000);
+        bank.passTime(12);
+        assertEquals(5030, bank.getAccount(checkingID).getBalance());
     }
 }
