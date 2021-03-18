@@ -6,10 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BankTest {
-    public static final String SAVING = "saving";
-    public static final String CHECKING = "checking";
-    public static final String CD = "CD";
-
 
     public static final double APR = 0.01;
     public static final double startAmount = 1000;
