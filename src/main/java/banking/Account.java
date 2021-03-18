@@ -2,7 +2,7 @@ package banking;
 
 public abstract class Account {
 
-    private double balance;
+    private double balance = 0;
     private String accountType;
     private String ID;
     private double APR;
@@ -39,6 +39,7 @@ public abstract class Account {
         if (isLessThanZero(balance)) {
             balance = 0;
         }
+
     }
 
     public double getAPR() {
@@ -65,7 +66,7 @@ public abstract class Account {
     }
 
     private boolean isLessThanZero(double amount) {
-        return amount < 0;
+        return amount <= 0;
     }
 
 }
