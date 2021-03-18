@@ -1,7 +1,5 @@
 package banking;
 
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.Map;
 
 public class PassTime {
@@ -30,28 +28,32 @@ public class PassTime {
     }
 
     private void calculateCdAPR(Account account, int months) {
-
-    }
-
-    private void calculateAPR(Account account, int months) {
         for (int i = 0; i < months; i++) {
-            balance = account.getBalance();
-            APR = account.getAPR();
-
-            newAPR = APR / 100;
-            newAPR = newAPR / 12;
-            extraBalance = newAPR * balance;
-            DecimalFormat decimalFormat = new DecimalFormat("#.##");
-            decimalFormat.setRoundingMode(RoundingMode.FLOOR);
-            extraBalance = Double.parseDouble(decimalFormat.format(extraBalance));
+            setUpCalculations(account);
+            extraBalance = 4 * extraBalance;
             balance = balance + extraBalance;
             account.setBalance(balance);
         }
-        DecimalFormat decimalFormat = new DecimalFormat("#.##");
-        decimalFormat.setRoundingMode(RoundingMode.FLOOR);
-        balance = Double.parseDouble(decimalFormat.format(account.getBalance()));
-
         account.setBalance(balance);
+    }
+
+
+    private void calculateAPR(Account account, int months) {
+        for (int i = 0; i < months; i++) {
+            setUpCalculations(account);
+            balance = balance + extraBalance;
+            account.setBalance(balance);
+        }
+        account.setBalance(balance);
+    }
+
+    private void setUpCalculations(Account account) {
+        balance = account.getBalance();
+        APR = account.getAPR();
+
+        newAPR = APR / 100;
+        newAPR = newAPR / 12;
+        extraBalance = newAPR * balance;
     }
 
 
