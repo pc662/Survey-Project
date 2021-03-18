@@ -2,7 +2,7 @@ package banking;
 
 public abstract class Account {
 
-    private double balance;
+    private double balance = 0;
     private String accountType;
     private String ID;
     private double APR;

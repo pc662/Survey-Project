@@ -1,63 +1,34 @@
 package banking;
 
-import java.util.ArrayList;
-import java.util.Map;
 
 public class PassTime {
 
-    Map<String, Object> passedAccounts;
-    ArrayList<String> accountsToBeRemoved = new ArrayList<>();
-    Account account;
-    double zero = 0;
+    Account passedAccount;
     double balance;
     double extraBalance;
     double APR;
     double newAPR;
 
 
-    public PassTime(Map<String, Object> accounts) {
-        passedAccounts = accounts;
+    public PassTime(Account account) {
+        passedAccount = account;
     }
 
-    public void passTime(int months) {
-        for (int i = 0; i < months; i++) {
-            for (Map.Entry<String, Object> entry : passedAccounts.entrySet()) {
-                account = (Account) passedAccounts.get(entry.getKey());
-                if (account.getBalance() == zero) {
-                    accountsToBeRemoved.add(account.getID());
-                    continue;
-                } else if (account.getAccountType().equalsIgnoreCase("cd")) {
-                    calculateCdAPR(account);
-                } else {
-                    calculateAPR(account);
-                }
-            }
-        }
-        if (accountsToBeRemoved.size() > 0) {
-            removeAccounts();
-        }
-
+    public void passTime() {
+        calculateAPR(passedAccount);
     }
-
-    private void removeAccounts() {
-        for (int i = 0; i <= accountsToBeRemoved.size(); i++) {
-            passedAccounts.remove(accountsToBeRemoved.get(i));
-        }
-    }
-
-    private void calculateCdAPR(Account account) {
-        setUpCalculations(account);
-        extraBalance = 4 * extraBalance;
-        balance = balance + extraBalance;
-        account.setBalance(balance);
-
-    }
-
 
     private void calculateAPR(Account account) {
-        setUpCalculations(account);
-        balance = balance + extraBalance;
-        account.setBalance(balance);
+        if (account.getAccountType().equalsIgnoreCase("cd")) {
+            setUpCalculations(account);
+            extraBalance = 4 * extraBalance;
+            balance = balance + extraBalance;
+            account.setBalance(balance);
+        } else {
+            setUpCalculations(account);
+            balance = balance + extraBalance;
+            account.setBalance(balance);
+        }
     }
 
     private void setUpCalculations(Account account) {

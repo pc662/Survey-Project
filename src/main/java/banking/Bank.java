@@ -18,6 +18,10 @@ public class Bank {
         accounts.put(account.getID(), account);
     }
 
+    public void removeAccount(String accountID) {
+        accounts.remove(accountID);
+    }
+
     public Account getAccount(String ID) {
         return (Account) accounts.get(ID);
     }
@@ -28,7 +32,17 @@ public class Bank {
     }
 
 
-    public void passTime(int i) {
-        new PassTime(accounts).passTime(i);
+    public void passTime(int months) {
+        for (int i = 0; i < months; i++) {
+            for (Map.Entry<String, Object> entry : accounts.entrySet()) {
+                double zero = 0;
+                Account account = (Account) accounts.get(entry.getKey());
+                if (account.getBalance() == zero) {
+                    removeAccount(account.getID());
+                } else {
+                    new PassTime(account).passTime();
+                }
+            }
+        }
     }
 }

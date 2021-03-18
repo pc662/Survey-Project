@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PassTimeTest {
 
@@ -15,7 +16,6 @@ public class PassTimeTest {
     public static final double startAmount = 1000;
 
     Account checking = new Checking(checkingID, APR);
-    Account saving = new Saving(savingID, APR);
     Account cd = new CertificateOfDeposit(cdID, APR, startAmount);
 
     Bank bank;
@@ -24,8 +24,6 @@ public class PassTimeTest {
     void setup() {
         bank = new Bank();
         bank.addAccount(checking);
-        bank.addAccount(saving);
-        bank.addAccount(cd);
     }
 
     @Test
@@ -114,6 +112,7 @@ public class PassTimeTest {
 
     @Test
     void pass_one_month_cd_with_5000_dollars() {
+        bank.addAccount(cd);
         bank.getAccount(cdID).deposit(4000);
         bank.passTime(1);
         assertEquals(5010, bank.getAccount(cdID).getBalance());
@@ -121,6 +120,7 @@ public class PassTimeTest {
 
     @Test
     void pass_twelve_months_cd_with_5000_dollars() {
+        bank.addAccount(cd);
         bank.getAccount(cdID).deposit(4000);
         bank.passTime(12);
         assertEquals(5121.328839727015, bank.getAccount(cdID).getBalance());
@@ -128,9 +128,17 @@ public class PassTimeTest {
 
     @Test
     void pass_sixty_months_cd_with_5000_dollars() {
+        bank.addAccount(cd);
         bank.getAccount(cdID).deposit(4000);
         bank.passTime(60);
         assertEquals(5636.808700912838, bank.getAccount(cdID).getBalance());
+    }
+
+    @Test
+    void pass_one_month_checking_with_0_dollars() {
+        bank.passTime(1);
+        assertTrue(bank.getStoredAccounts().isEmpty());
+
     }
 
 
