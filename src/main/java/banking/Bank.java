@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Bank {
+    double zero = 0;
+    double hundred = 100;
+    double temporaryBalance;
     private Map<String, Object> accounts;
 
     public Bank() {
@@ -45,12 +48,22 @@ public class Bank {
     }
 
     private void removeAccountOrAPRCalculations(Map.Entry<String, Object> entry) {
-        double zero = 0;
         Account account = (Account) accounts.get(entry.getKey());
         if (account.getBalance() == zero) {
             removeAccount(account.getID());
+        } else if (account.getBalance() < hundred) {
+            subtractTwentyFive(account);
+            new PassTime(account).passTime();
         } else {
             new PassTime(account).passTime();
         }
+    }
+
+    private void subtractTwentyFive(Account account) {
+        temporaryBalance = account.getBalance() - 25;
+        if (temporaryBalance <= zero) {
+            temporaryBalance = 0;
+        }
+        account.setBalance(temporaryBalance);
     }
 }

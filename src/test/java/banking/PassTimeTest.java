@@ -160,5 +160,69 @@ public class PassTimeTest {
         assertTrue(bank.getStoredAccounts().isEmpty());
     }
 
+    @Test
+    void pass_one_month_checking_with_100_dollars() {
+        bank.getAccount(checkingID).deposit(100);
+        bank.passTime(1);
+        assertEquals(100.05, bank.getAccount(checkingID).getBalance());
+    }
+
+    @Test
+    void pass_one_month_checking_with_50_dollars() {
+        bank.getAccount(checkingID).deposit(50);
+        bank.passTime(1);
+        assertEquals(25.0125, bank.getAccount(checkingID).getBalance());
+    }
+
+    @Test
+    void pass_two_month_checking_with_50_dollars() {
+        bank.getAccount(checkingID).deposit(50);
+        bank.passTime(2);
+        assertEquals(0.012506249999999289, bank.getAccount(checkingID).getBalance());
+    }
+
+    @Test
+    void pass_three_months_checking_with_50_dollars() {
+        bank.getAccount(checkingID).deposit(50);
+        bank.passTime(3);
+        assertEquals(0, bank.getAccount(checkingID).getBalance());
+    }
+
+    @Test
+    void pass_four_months_checking_with_50_dollars() {
+        bank.getAccount(checkingID).deposit(50);
+        bank.passTime(4);
+        assertTrue(bank.getStoredAccounts().isEmpty());
+
+    }
+
+    @Test
+    void pass_one_month_checking_with_99_dollars() {
+        bank.getAccount(checkingID).deposit(99);
+        bank.passTime(1);
+        assertEquals(74.037, bank.getAccount(checkingID).getBalance());
+    }
+
+    @Test
+    void pass_two_month_checking_with_99_dollars() {
+        bank.getAccount(checkingID).deposit(99);
+        bank.passTime(2);
+        assertEquals(49.061518500000005, bank.getAccount(checkingID).getBalance());
+    }
+
+    @Test
+    void pass_three_months_checking_with_99_dollars() {
+        bank.getAccount(checkingID).deposit(99);
+        bank.passTime(3);
+        assertEquals(24.073549259250004, bank.getAccount(checkingID).getBalance());
+    }
+
+    @Test
+    void pass_five_months_checking_with_99_dollars() {
+        bank.getAccount(checkingID).deposit(99);
+        bank.passTime(5);
+        assertTrue(bank.getStoredAccounts().isEmpty());
+    }
+
 
 }
