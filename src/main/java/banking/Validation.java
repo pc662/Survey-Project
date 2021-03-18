@@ -5,6 +5,7 @@ public class Validation {
     protected Bank bank;
     String[] splitString;
     int stringLength;
+    int month;
     String command;
     String accountType;
     String ID;
