@@ -9,7 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class PassTimeTest {
 
     public static final String checkingID = "09283745";
-    public static final String savingID = "39405948";
     public static final String cdID = "39203940";
 
     public static final double APR = 0.6;
@@ -24,12 +23,6 @@ public class PassTimeTest {
     void setup() {
         bank = new Bank();
         bank.addAccount(checking);
-    }
-
-    @Test
-    void pass_one_month_checking_with_zero_dollars() {
-        bank.passTime(1);
-        assertEquals(0, bank.getAccount(checkingID).getBalance());
     }
 
     @Test

@@ -34,15 +34,23 @@ public class Bank {
 
     public void passTime(int months) {
         for (int i = 0; i < months; i++) {
-            for (Map.Entry<String, Object> entry : accounts.entrySet()) {
-                double zero = 0;
-                Account account = (Account) accounts.get(entry.getKey());
-                if (account.getBalance() == zero) {
-                    removeAccount(account.getID());
-                } else {
-                    new PassTime(account).passTime();
-                }
-            }
+            IterateAccounts();
+        }
+    }
+
+    private void IterateAccounts() {
+        for (Map.Entry<String, Object> entry : accounts.entrySet()) {
+            removeAccountOrAPRCalculations(entry);
+        }
+    }
+
+    private void removeAccountOrAPRCalculations(Map.Entry<String, Object> entry) {
+        double zero = 0;
+        Account account = (Account) accounts.get(entry.getKey());
+        if (account.getBalance() == zero) {
+            removeAccount(account.getID());
+        } else {
+            new PassTime(account).passTime();
         }
     }
 }
