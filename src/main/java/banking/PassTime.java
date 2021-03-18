@@ -1,11 +1,14 @@
 package banking;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 public class PassTime {
 
     Map<String, Object> passedAccounts;
+    ArrayList<String> accountsToBeRemoved = new ArrayList<>();
     Account account;
+    double zero = 0;
     double balance;
     double extraBalance;
     double APR;
@@ -20,12 +23,25 @@ public class PassTime {
         for (int i = 0; i < months; i++) {
             for (Map.Entry<String, Object> entry : passedAccounts.entrySet()) {
                 account = (Account) passedAccounts.get(entry.getKey());
-                if (account.getAccountType().equalsIgnoreCase("cd")) {
+                if (account.getBalance() == zero) {
+                    accountsToBeRemoved.add(account.getID());
+                    continue;
+                } else if (account.getAccountType().equalsIgnoreCase("cd")) {
                     calculateCdAPR(account);
                 } else {
                     calculateAPR(account);
                 }
             }
+        }
+        if (accountsToBeRemoved.size() > 0) {
+            removeAccounts();
+        }
+
+    }
+
+    private void removeAccounts() {
+        for (int i = 0; i <= accountsToBeRemoved.size(); i++) {
+            passedAccounts.remove(accountsToBeRemoved.get(i));
         }
     }
 
