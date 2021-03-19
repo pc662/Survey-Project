@@ -56,5 +56,27 @@ public class TransferTest {
         assertFalse(saving.isAbleToWithdraw());
     }
 
+    @Test
+    void transfer_300_from_empty_saving_to_checking() {
+        checking.deposit(1000);
+        bank.transfer(saving, checking, 300);
+        assertEquals(1000, bank.getAccount(checkingID).getBalance());
+    }
+
+    @Test
+    void transfer_300_but_actual_is_48_from_checking_to_saving() {
+        checking.deposit(48);
+        saving.deposit(1000);
+        bank.transfer(checking, saving, 300);
+        assertEquals(1048, bank.getAccount(savingID).getBalance());
+    }
+
+    @Test
+    void transfer_300_but_actual_is_48_from_checking_to_saving_and_saving_is_empty() {
+        checking.deposit(48);
+        bank.transfer(checking, saving, 300);
+        assertEquals(48, bank.getAccount(savingID).getBalance());
+    }
+
 
 }
