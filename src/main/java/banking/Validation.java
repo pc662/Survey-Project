@@ -10,6 +10,7 @@ public class Validation {
     String accountType;
     String ID;
     double APR;
+    double money;
     double cdMoney;
     String originalString;
 
@@ -32,6 +33,8 @@ public class Validation {
             return new DepositValidation(bank).validate(originalString);
         } else if (splitString[0].equalsIgnoreCase("pass")) {
             return new PassTimeValidation(bank).validate(originalString);
+        } else if (splitString[0].equalsIgnoreCase("withdraw")) {
+            return new WithdrawValidation(bank).validate(originalString);
         } else {
             return false;
         }
