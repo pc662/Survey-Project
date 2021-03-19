@@ -54,14 +54,14 @@ public class WithdrawValidation extends Validation {
 
     private boolean validateSaving() {
         if (bank.getAccount(ID).isAbleToWithdraw()) {
-            if ((money >= 1000) || (money < 0)) {
-                return false;
-            } else {
-                return true;
-            }
+            return validateSavingsAmount();
         } else {
             return false;
         }
+    }
+
+    private boolean validateSavingsAmount() {
+        return (!(money > 1000)) && (!(money < 0));
     }
 
     private boolean validateChecking() {
