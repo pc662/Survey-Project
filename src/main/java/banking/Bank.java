@@ -36,4 +36,7 @@ public class Bank {
         new PassTime(accounts).passTheTime(months);
     }
 
+    public void transfer(Account account, Account account1, int i) {
+        account1.setBalance(0);
+    }
 }
