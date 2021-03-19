@@ -250,10 +250,66 @@ public class WithdrawValidationTest {
     }
 
     @Test
-    void withdraw_cd_after_12_months() {
+    void withdraw_cd_after_12_months_with_a_bit_higher_withdraw_amount() {
         bank.addAccount(cd);
         bank.passTime(12);
         assertTrue(validation.validate("withdraw 01234567 5500"));
+    }
+
+    @Test
+    void withdraw_cd_after_13_months_with_a_bit_higher_withdraw_amount() {
+        bank.addAccount(cd);
+        bank.passTime(13);
+        assertTrue(validation.validate("withdraw 01234567 5500"));
+    }
+
+    @Test
+    void withdraw_cd_after_12_months_with_almost_exact_number() {
+        bank.addAccount(cd);
+        bank.passTime(12);
+        assertTrue(validation.validate("withdraw 01234567 5122"));
+    }
+
+
+    @Test
+    void withdraw_cd_after_60_months_with_almost_exact_number() {
+        bank.addAccount(cd);
+        bank.passTime(60);
+        assertTrue(validation.validate("withdraw 01234567 5637"));
+    }
+
+    @Test
+    void withdraw_cd_after_60_months_with_big_number() {
+        bank.addAccount(cd);
+        bank.passTime(60);
+        assertTrue(validation.validate("withdraw 01234567 10000"));
+    }
+
+    @Test
+    void withdraw_cd_with_no_time_passed() {
+        bank.addAccount(cd);
+        assertFalse(validation.validate("withdraw 01234567 10000"));
+    }
+
+    @Test
+    void withdraw_cd_11_months_passed() {
+        bank.addAccount(cd);
+        bank.passTime(11);
+        assertFalse(validation.validate("withdraw 01234567 10000"));
+    }
+
+    @Test
+    void withdraw_cd_12_months_passed_with_a_bit_less_than_balance() {
+        bank.addAccount(cd);
+        bank.passTime(12);
+        assertFalse(validation.validate("withdraw 01234567 5121"));
+    }
+
+    @Test
+    void withdraw_cd_60_months_passed_with_a_bit_less_than_balance() {
+        bank.addAccount(cd);
+        bank.passTime(60);
+        assertFalse(validation.validate("withdraw 01234567 5635"));
     }
 
 

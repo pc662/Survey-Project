@@ -3,7 +3,7 @@ package banking;
 public abstract class Account {
 
     protected boolean ableToWithdraw = true;
-    int monthsPassed = 0;
+    int monthsPassed = 1;
     private double balance = 0;
     private String accountType;
     private String ID;

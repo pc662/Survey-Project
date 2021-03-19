@@ -19,6 +19,8 @@ public class CommandProcessor {
             new DepositProcessor(bank).process(parsedCommand);
         } else if (parsedCommand[0].equalsIgnoreCase("pass")) {
             new PassTimeProcessor(bank).process(parsedCommand);
+        } else if (parsedCommand[0].equalsIgnoreCase("withdraw")) {
+
         }
 
     }
