@@ -12,7 +12,7 @@ public class Saving extends Account {
         if (isLessThanZero(getBalance())) {
             setBalance(0);
         }
-
+        setWithdrawFalse();
     }
 }
 

@@ -36,8 +36,12 @@ public abstract class Account {
         return ableToWithdraw;
     }
 
-    public void setAbleToWithdraw(boolean canOrCannotWithdraw) {
-        ableToWithdraw = canOrCannotWithdraw;
+    public void setWithdrawFalse() {
+        ableToWithdraw = false;
+    }
+
+    public void setWithdrawTrue() {
+        ableToWithdraw = true;
     }
 
     public int getMonthsPassed() {

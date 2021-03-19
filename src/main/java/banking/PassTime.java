@@ -16,7 +16,7 @@ public class PassTime {
 
     public void passTime() {
         if (!passedAccount.getAccountType().equalsIgnoreCase("cd")) {
-            passedAccount.setAbleToWithdraw(true);
+            passedAccount.setWithdrawTrue();
         }
         calculateAPR(passedAccount);
         passedAccount.incrementMonthsPassed();
