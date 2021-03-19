@@ -34,9 +34,34 @@ public class WithdrawProcessorTest {
     }
 
     @Test
-    void withdraw_from_checking_1000() {
-        process("withdraw 12345678");
-        assertEquals(4000, bank.getAccount(checkingID).getBalance());
+    void withdraw_from_checking_400() {
+        process("withdraw 12345678 400");
+        assertEquals(4600, bank.getAccount(checkingID).getBalance());
+    }
+
+    @Test
+    void withdraw_from_checking_0() {
+        process("withdraw 12345678 0");
+        assertEquals(5000, bank.getAccount(checkingID).getBalance());
+    }
+
+    @Test
+    void withdraw_from_saving_1000() {
+        process("withdraw 00000000 1000");
+        assertEquals(4000, bank.getAccount(savingsID).getBalance());
+    }
+
+    @Test
+    void withdraw_from_saving_1() {
+        process("withdraw 00000000 1");
+        assertEquals(4999, bank.getAccount(savingsID).getBalance());
+    }
+
+    @Test
+    void withdraw_from_cd_after_12_months() {
+        process("pass 12");
+        process("withdraw 01234567 6000");
+        assertEquals(0, bank.getAccount(cdID).getBalance());
     }
 
     private void process(String checkingAccountCommand) {
