@@ -270,7 +270,6 @@ public class WithdrawValidationTest {
         assertTrue(validation.validate("withdraw 01234567 5122"));
     }
 
-
     @Test
     void withdraw_cd_after_60_months_with_almost_exact_number() {
         bank.addAccount(cd);
@@ -312,6 +311,17 @@ public class WithdrawValidationTest {
         assertFalse(validation.validate("withdraw 01234567 5635"));
     }
 
+    @Test
+    void withdraw_with_single_command() {
+        bank.addAccount(cd);
+        bank.passTime(60);
+        assertFalse(validation.validate("withdraw"));
+    }
+
+    @Test
+    void withdraw_with_no_account_with_specified_id() {
+        assertFalse(validation.validate("withdraw 29384059 1000"));
+    }
 
     private Validation verify() {
         return new Validation(bank);
