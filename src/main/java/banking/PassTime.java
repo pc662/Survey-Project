@@ -1,30 +1,66 @@
 package banking;
 
 
-public class PassTime {
+import java.util.HashMap;
+import java.util.Map;
 
-    Account passedAccount;
+public class PassTime extends Bank {
+
     double balance;
     double extraBalance;
     double APR;
     double newAPR;
 
-
-    public PassTime(Account account) {
-        passedAccount = account;
+    PassTime(Map<String, Object> passedAccounts) {
+        accounts = passedAccounts;
     }
 
-    public void passTime() {
+    public void passTheTime(int months) {
+        for (int i = 0; i < months; i++) {
+            IterateAccounts();
+        }
+    }
+
+    private void IterateAccounts() {
+        iteratingAccounts = new HashMap<>(accounts);
+        for (Object account : iteratingAccounts.values()) {
+            removeAccountOrAPRCalculations(account);
+        }
+    }
+
+    private void removeAccountOrAPRCalculations(Object entry) {
+        Account account = (Account) entry;
+        if (account.getBalance() == 0) {
+            removeAccount(account.getID());
+        } else if (account.getBalance() < 100) {
+            subtractTwentyFive(account);
+            determineAccountType(account);
+        } else {
+            determineAccountType(account);
+        }
+    }
+
+    private void subtractTwentyFive(Account account) {
+        double temporaryBalance;
+
+        temporaryBalance = account.getBalance() - 25;
+        if (temporaryBalance <= 0) {
+            temporaryBalance = 0;
+        }
+        account.setBalance(temporaryBalance);
+    }
+
+    private void determineAccountType(Account passedAccount) {
         if (!passedAccount.getAccountType().equalsIgnoreCase("cd")) {
             passedAccount.setWithdrawTrue();
         } else {
-            checkCDMonths();
+            checkCDMonths(passedAccount);
         }
         calculateAPR(passedAccount);
         passedAccount.incrementMonthsPassed();
     }
 
-    private void checkCDMonths() {
+    private void checkCDMonths(Account passedAccount) {
         if (passedAccount.getMonthsPassed() >= 12) {
             passedAccount.setWithdrawTrue();
         }
