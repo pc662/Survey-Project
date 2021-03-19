@@ -264,6 +264,18 @@ public class CreateValidationTest {
         assertTrue(validation.validate("create savings 01234567 9.999"));
     }
 
+    @Test
+    void APR_validate_with_whole_number_5() {
+        validation = verify();
+        assertTrue(validation.validate("create savings 01234567 5"));
+    }
+
+    @Test
+    void APR_validate_with_whole_number_9() {
+        validation = verify();
+        assertTrue(validation.validate("create savings 01234567 9"));
+    }
+
     //cd testing
     @Test
     void CD_validate_amount_with_1000() {
