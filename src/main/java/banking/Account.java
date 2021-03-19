@@ -2,6 +2,8 @@ package banking;
 
 public abstract class Account {
 
+    protected boolean ableToWithdraw = true;
+    int monthsPassed = 1;
     private double balance = 0;
     private String accountType;
     private String ID;
@@ -28,6 +30,26 @@ public abstract class Account {
 
     public void setBalance(double amount) {
         balance = amount;
+    }
+
+    public boolean isAbleToWithdraw() {
+        return ableToWithdraw;
+    }
+
+    public void setWithdrawFalse() {
+        ableToWithdraw = false;
+    }
+
+    public void setWithdrawTrue() {
+        ableToWithdraw = true;
+    }
+
+    public int getMonthsPassed() {
+        return monthsPassed;
+    }
+
+    public void incrementMonthsPassed() {
+        this.monthsPassed += 1;
     }
 
     public void deposit(double amount) {
@@ -65,7 +87,7 @@ public abstract class Account {
         return !(depositAmount > 2500) && !(depositAmount < 0);
     }
 
-    private boolean isLessThanZero(double amount) {
+    protected boolean isLessThanZero(double amount) {
         return amount <= 0;
     }
 

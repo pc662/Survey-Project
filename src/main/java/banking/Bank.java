@@ -4,10 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Bank {
-    double zero = 0;
-    double hundred = 100;
-    double temporaryBalance;
-    private Map<String, Object> accounts;
+    public Map<String, Object> accounts;
+    public Map<String, Object> iteratingAccounts;
 
     public Bank() {
         accounts = new HashMap<>();
@@ -34,36 +32,8 @@ public class Bank {
         return account.isValid(depositAmount);
     }
 
-
     public void passTime(int months) {
-        for (int i = 0; i < months; i++) {
-            IterateAccounts();
-        }
+        new PassTime(accounts).passTheTime(months);
     }
 
-    private void IterateAccounts() {
-        for (Map.Entry<String, Object> entry : accounts.entrySet()) {
-            removeAccountOrAPRCalculations(entry);
-        }
-    }
-
-    private void removeAccountOrAPRCalculations(Map.Entry<String, Object> entry) {
-        Account account = (Account) accounts.get(entry.getKey());
-        if (account.getBalance() == zero) {
-            removeAccount(account.getID());
-        } else if (account.getBalance() < hundred) {
-            subtractTwentyFive(account);
-            new PassTime(account).passTime();
-        } else {
-            new PassTime(account).passTime();
-        }
-    }
-
-    private void subtractTwentyFive(Account account) {
-        temporaryBalance = account.getBalance() - 25;
-        if (temporaryBalance <= zero) {
-            temporaryBalance = 0;
-        }
-        account.setBalance(temporaryBalance);
-    }
 }

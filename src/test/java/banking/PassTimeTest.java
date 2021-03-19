@@ -9,12 +9,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class PassTimeTest {
 
     public static final String checkingID = "09283745";
+    public static final String savingID = "01234567";
     public static final String cdID = "39203940";
 
     public static final double APR = 0.6;
     public static final double startAmount = 1000;
 
     Account checking = new Checking(checkingID, APR);
+    Account checking2 = new Checking("00000000", APR);
+    Account saving = new Saving(savingID, APR);
     Account cd = new CertificateOfDeposit(cdID, APR, startAmount);
 
     Bank bank;
@@ -149,6 +152,13 @@ public class PassTimeTest {
     }
 
     @Test
+    void pass_one_month_with_two_checking_with_0_dollars() {
+        bank.addAccount(checking2);
+        bank.passTime(1);
+        assertTrue(bank.getStoredAccounts().isEmpty());
+    }
+
+    @Test
     void pass_ten_months_checking_with_0_dollars() {
         bank.passTime(10);
         assertTrue(bank.getStoredAccounts().isEmpty());
@@ -222,6 +232,38 @@ public class PassTimeTest {
         bank.getAccount(checkingID).deposit(99);
         bank.passTime(5);
         assertTrue(bank.getStoredAccounts().isEmpty());
+    }
+
+    @Test
+    void pass_one_month_saving_with_0_dollars() {
+        bank.addAccount(saving);
+        bank.passTime(1);
+        assertTrue(bank.getStoredAccounts().isEmpty());
+    }
+
+    @Test
+    void pass_one_month_cd_with_0_dollars() {
+        bank.addAccount(cd);
+        cd.setBalance(0);
+        bank.passTime(1);
+        assertTrue(bank.getStoredAccounts().isEmpty());
+    }
+
+    @Test
+    void pass_one_month_multiple_accounts_with_0_dollars() {
+        bank.addAccount(cd);
+        cd.setBalance(0);
+        bank.addAccount(saving);
+        bank.passTime(1);
+        assertTrue(bank.getStoredAccounts().isEmpty());
+    }
+
+    @Test
+    void pass_one_month_multiple_accounts_with_0_dollars_except_one() {
+        bank.addAccount(cd);
+        bank.addAccount(saving);
+        bank.passTime(1);
+        assertEquals(1, bank.getStoredAccounts().size());
     }
 
 
