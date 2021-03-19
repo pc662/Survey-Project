@@ -8,6 +8,8 @@ public class CertificateOfDeposit extends Account {
         this.setBalance(startAmount);
         this.ableToWithdraw = false;
     }
+
+
 }
 
 

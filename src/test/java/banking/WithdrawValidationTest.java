@@ -10,12 +10,14 @@ public class WithdrawValidationTest {
 
     String savingsID = "00000000";
     String checkingID = "12345678";
+    String cdID = "01234567";
     double APR = 0.6;
 
     Bank bank;
 
     Account saving;
     Account checking;
+    Account cd;
     Validation validation;
 
     @BeforeEach
@@ -23,6 +25,7 @@ public class WithdrawValidationTest {
         bank = new Bank();
         saving = new Saving(savingsID, APR);
         checking = new Checking(checkingID, APR);
+        cd = new CertificateOfDeposit(cdID, APR, 5000);
         validation = verify();
     }
 
@@ -138,6 +141,119 @@ public class WithdrawValidationTest {
         saving.withdraw(1000);
         saving.withdraw(1000);
         assertFalse(validation.validate("withdraw 00000000 1000"));
+    }
+
+    @Test
+    void withdraw_savings_abc() {
+        bank.addAccount(saving);
+        assertFalse(validation.validate("withdraw 00000000 abc"));
+    }
+
+    @Test
+    void withdraw_checking_0() {
+        bank.addAccount(checking);
+        assertTrue(validation.validate("withdraw 12345678 0"));
+    }
+
+    @Test
+    void withdraw_checking_1() {
+        bank.addAccount(checking);
+        assertTrue(validation.validate("withdraw 12345678 1"));
+    }
+
+    @Test
+    void withdraw_checking_399() {
+        bank.addAccount(checking);
+        assertTrue(validation.validate("withdraw 12345678 399"));
+    }
+
+    @Test
+    void withdraw_checking_399_and_99_cents() {
+        bank.addAccount(checking);
+        assertTrue(validation.validate("withdraw 12345678 399.99"));
+    }
+
+    @Test
+    void withdraw_checking_400() {
+        bank.addAccount(checking);
+        assertTrue(validation.validate("withdraw 12345678 400"));
+    }
+
+    @Test
+    void withdraw_checking_400_with_decimal() {
+        bank.addAccount(checking);
+        assertTrue(validation.validate("withdraw 12345678 400.00"));
+    }
+
+    @Test
+    void withdraw_checking_253() {
+        bank.addAccount(checking);
+        assertTrue(validation.validate("withdraw 12345678 253"));
+    }
+
+    @Test
+    void withdraw_checking_253_with_decimal() {
+        bank.addAccount(checking);
+        assertTrue(validation.validate("withdraw 12345678 253.50"));
+    }
+
+    @Test
+    void withdraw_checking_400_two_times() {
+        bank.addAccount(checking);
+        checking.withdraw(400);
+        assertTrue(validation.validate("withdraw 12345678 0"));
+    }
+
+    @Test
+    void withdraw_checking_400_two_times_after_passed_time() {
+        bank.addAccount(checking);
+        checking.deposit(1000);
+        checking.withdraw(400);
+        bank.passTime(1);
+        assertTrue(validation.validate("withdraw 12345678 0"));
+    }
+
+    @Test
+    void withdraw_checking_with_negative_1() {
+        bank.addAccount(checking);
+        assertFalse(validation.validate("withdraw 12345678 -1"));
+    }
+
+    @Test
+    void withdraw_checking_with_big_number() {
+        bank.addAccount(checking);
+        assertFalse(validation.validate("withdraw 12345678 10293"));
+    }
+
+    @Test
+    void withdraw_checking_with_401() {
+        bank.addAccount(checking);
+        assertFalse(validation.validate("withdraw 12345678 401"));
+    }
+
+    @Test
+    void withdraw_checking_with_400_and_1_cent() {
+        bank.addAccount(checking);
+        assertFalse(validation.validate("withdraw 12345678 400.01"));
+    }
+
+    @Test
+    void withdraw_checking_with_abc() {
+        bank.addAccount(checking);
+        assertFalse(validation.validate("withdraw 12345678 abc"));
+    }
+
+    @Test
+    void withdraw_checking_with_negative_400() {
+        bank.addAccount(checking);
+        assertFalse(validation.validate("withdraw 12345678 -400"));
+    }
+
+    @Test
+    void withdraw_cd_after_12_months() {
+        bank.addAccount(cd);
+        bank.passTime(12);
+        assertTrue(validation.validate("withdraw 01234567 5500"));
     }
 
 

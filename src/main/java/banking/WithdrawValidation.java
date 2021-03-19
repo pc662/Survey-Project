@@ -65,11 +65,27 @@ public class WithdrawValidation extends Validation {
     }
 
     private boolean validateChecking() {
-        return true;
+        if (bank.getAccount(ID).isAbleToWithdraw()) {
+            return validateCheckingAmount();
+        } else {
+            return false;
+        }
+    }
+
+    private boolean validateCheckingAmount() {
+        return (!(money > 400)) && (!(money < 0));
     }
 
     private boolean validateCD() {
-        return true;
+        if (bank.getAccount(ID).isAbleToWithdraw()) {
+            return validateCDAmount();
+        } else {
+            return false;
+        }
+    }
+
+    private boolean validateCDAmount() {
+        return money > bank.getAccount(ID).getBalance();
     }
 
     private boolean isCd() {
