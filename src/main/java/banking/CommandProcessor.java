@@ -20,7 +20,7 @@ public class CommandProcessor {
         } else if (parsedCommand[0].equalsIgnoreCase("pass")) {
             new PassTimeProcessor(bank).process(parsedCommand);
         } else if (parsedCommand[0].equalsIgnoreCase("withdraw")) {
-
+            new WithdrawProcessor(bank).process(parsedCommand);
         }
 
     }
