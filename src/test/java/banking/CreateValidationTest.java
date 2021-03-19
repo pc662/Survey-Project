@@ -153,7 +153,6 @@ public class CreateValidationTest {
         bank.addAccount(checking);
         validation = verify();
         assertFalse(validation.validate("create savings 01234567 0.01"));
-
     }
 
     @Test
