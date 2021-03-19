@@ -28,5 +28,15 @@ public class TransferTest {
     void transfer_300_from_checking_to_saving() {
         bank.transfer(bank.getAccount(checkingID), bank.getAccount(savingID), 300);
         assertEquals(0, bank.getAccount(savingID).getBalance());
+        assertEquals(0, bank.getAccount(checkingID).getBalance());
+    }
+
+    @Test
+    void transfer_300_from_checking_to_saving_with_initial_money() {
+        checking.deposit(1000);
+        saving.deposit(1000);
+        bank.transfer(checking, saving, 300);
+        assertEquals(1300, bank.getAccount(savingID).getBalance());
+        assertEquals(700, bank.getAccount(checkingID).getBalance());
     }
 }
