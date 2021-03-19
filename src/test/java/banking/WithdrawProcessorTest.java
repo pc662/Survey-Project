@@ -64,6 +64,7 @@ public class WithdrawProcessorTest {
         assertEquals(0, bank.getAccount(cdID).getBalance());
     }
 
+
     private void process(String checkingAccountCommand) {
         CommandProcessor commandProcessor = new CommandProcessor(bank);
         commandProcessor.process(checkingAccountCommand);

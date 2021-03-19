@@ -247,7 +247,23 @@ public class PassTimeTest {
         cd.setBalance(0);
         bank.passTime(1);
         assertTrue(bank.getStoredAccounts().isEmpty());
+    }
 
+    @Test
+    void pass_one_month_multiple_accounts_with_0_dollars() {
+        bank.addAccount(cd);
+        cd.setBalance(0);
+        bank.addAccount(saving);
+        bank.passTime(1);
+        assertTrue(bank.getStoredAccounts().isEmpty());
+    }
+
+    @Test
+    void pass_one_month_multiple_accounts_with_0_dollars_except_one() {
+        bank.addAccount(cd);
+        bank.addAccount(saving);
+        bank.passTime(1);
+        assertEquals(1, bank.getStoredAccounts().size());
     }
 
 
