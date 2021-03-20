@@ -181,6 +181,98 @@ public class TransferValidationTest {
         assertFalse(validation.validate("transfer " + savingID1 + " " + savingID2 + " 1001"));
     }
 
+    @Test
+    void transfer_400_from_checking_to_saving() {
+        assertTrue(validation.validate("transfer " + checkingID1 + " " + savingID1 + " 400"));
+    }
+
+    @Test
+    void transfer_0_from_checking_to_saving() {
+        assertTrue(validation.validate("transfer " + checkingID1 + " " + savingID1 + " 0"));
+    }
+
+    @Test
+    void transfer_1_from_checking_to_saving() {
+        assertTrue(validation.validate("transfer " + checkingID1 + " " + savingID1 + " 1"));
+    }
+
+    @Test
+    void transfer_399_point_99_from_checking_to_saving() {
+        assertTrue(validation.validate("transfer " + checkingID1 + " " + savingID1 + " 399.99"));
+    }
+
+    @Test
+    void transfer_0_from_saving_to_checking() {
+        assertTrue(validation.validate("transfer " + savingID1 + " " + checkingID1 + " 0"));
+    }
+
+    @Test
+    void transfer_1000_from_saving_to_checking() {
+        assertTrue(validation.validate("transfer " + savingID1 + " " + checkingID1 + " 1000"));
+    }
+
+    @Test
+    void transfer_1_from_saving_to_checking() {
+        assertTrue(validation.validate("transfer " + savingID1 + " " + checkingID1 + " 1"));
+    }
+
+    @Test
+    void transfer_300_from_saving_to_checking() {
+        assertTrue(validation.validate("transfer " + savingID1 + " " + checkingID1 + " 0"));
+    }
+
+    @Test
+    void transfer_700_from_saving_to_checking() {
+        assertTrue(validation.validate("transfer " + savingID1 + " " + checkingID1 + " 0"));
+    }
+
+    @Test
+    void transfer_1000_from_saving_to_checking_with_pass_time() {
+        saving1.deposit(5000);
+        checking1.deposit(5000);
+        bank.transfer(saving1, checking1, 1000);
+        bank.passTime(2);
+        assertTrue(validation.validate("transfer " + savingID1 + " " + checkingID1 + " 0"));
+    }
+
+    @Test
+    void transfer_401_from_checking_to_saving() {
+        assertFalse(validation.validate("transfer " + checkingID1 + " " + savingID1 + " 401"));
+    }
+
+    @Test
+    void transfer_400_point_01_from_checking_to_saving() {
+        assertFalse(validation.validate("transfer " + checkingID1 + " " + savingID1 + " 400.01"));
+    }
+
+    @Test
+    void transfer_negative_zero_point_01_from_checking_to_saving() {
+        assertFalse(validation.validate("transfer " + checkingID1 + " " + savingID1 + " -0.01"));
+    }
+
+    @Test
+    void transfer_1000_from_checking_to_saving() {
+        assertFalse(validation.validate("transfer " + checkingID1 + " " + savingID1 + " 401"));
+    }
+
+    @Test
+    void transfer_1000_point_01_from_saving_to_checking() {
+        assertFalse(validation.validate("transfer " + savingID1 + " " + checkingID1 + " 1000.01"));
+    }
+
+    @Test
+    void transfer_negative_zero_point_01_from_saving_to_checking() {
+        assertFalse(validation.validate("transfer " + savingID1 + " " + checkingID1 + " -0.01"));
+    }
+
+    @Test
+    void transfer_1000_from_saving_to_checking_with_no_time_pass() {
+        saving1.deposit(5000);
+        checking1.deposit(5000);
+        bank.transfer(saving1, checking1, 1000);
+        assertFalse(validation.validate("transfer " + savingID1 + " " + checkingID1 + " 1000"));
+    }
+
 
     private Validation verify() {
         return new Validation(bank);

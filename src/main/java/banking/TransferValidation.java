@@ -29,11 +29,15 @@ public class TransferValidation extends Validation {
         accountToWithdrawID = splitString[1];
         accountToDepositID = splitString[2];
         if (isValidTransferAmount()) {
-            if (validateWithdrawID()) {
-                return validateDepositID();
-            } else {
-                return false;
-            }
+            return validateWithdraw();
+        } else {
+            return false;
+        }
+    }
+
+    private boolean validateWithdraw() {
+        if (validateWithdrawID()) {
+            return validateDepositID();
         } else {
             return false;
         }
