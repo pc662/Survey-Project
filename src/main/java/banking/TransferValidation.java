@@ -40,7 +40,11 @@ public class TransferValidation extends Validation {
     }
 
     private boolean accountsDoNotExist() {
-        return !bank.getStoredAccounts().containsKey(accountToDepositID) && !bank.getStoredAccounts().containsKey(accountToWithdrawID);
+        if (bank.getStoredAccounts().containsKey(accountToWithdrawID)) {
+            return !bank.getStoredAccounts().containsKey(accountToDepositID);
+        } else {
+            return true;
+        }
     }
 
     private boolean sameAccounts() {
