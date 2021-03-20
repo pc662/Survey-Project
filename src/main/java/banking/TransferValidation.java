@@ -30,10 +30,20 @@ public class TransferValidation extends Validation {
         accountToDepositID = splitString[2];
         if (sameAccounts()) {
             return false;
+        } else if (accountsDoNotExist()) {
+            return false;
         } else if (eitherAccountsAreCD()) {
             return false;
         } else {
             return validateTransfer();
+        }
+    }
+
+    private boolean accountsDoNotExist() {
+        if (bank.getStoredAccounts().containsKey(accountToWithdrawID)) {
+            return !bank.getStoredAccounts().containsKey(accountToDepositID);
+        } else {
+            return true;
         }
     }
 
@@ -54,20 +64,12 @@ public class TransferValidation extends Validation {
     }
 
     private boolean validateWithdraw() {
-        if (validateWithdrawID()) {
-            return validateDepositID();
-        } else {
-            return false;
-        }
+        return validateWithdrawID();
     }
 
 
     private boolean validateWithdrawID() {
         return new Validation(bank).validate("withdraw " + accountToWithdrawID + " " + transferAmount);
-    }
-
-    private boolean validateDepositID() {
-        return new Validation(bank).validate("deposit " + accountToDepositID + " " + transferAmount);
     }
 
     private boolean isValidTransferAmount() {

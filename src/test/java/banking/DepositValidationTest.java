@@ -261,9 +261,9 @@ public class DepositValidationTest {
         assertFalse(validation.validate("deposit " + cdID + " 0.00"));
     }
 
+
     private Validation verify() {
         return new Validation(bank);
     }
-
 
 }

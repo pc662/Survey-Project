@@ -305,6 +305,13 @@ public class WithdrawValidationTest {
     }
 
     @Test
+    void withdraw_cd_12_months_passed_with_a_much_less_than_balance() {
+        bank.addAccount(cd);
+        bank.passTime(12);
+        assertFalse(validation.validate("withdraw 01234567 100"));
+    }
+
+    @Test
     void withdraw_cd_60_months_passed_with_a_bit_less_than_balance() {
         bank.addAccount(cd);
         bank.passTime(60);

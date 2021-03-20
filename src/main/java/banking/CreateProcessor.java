@@ -22,7 +22,7 @@ public class CreateProcessor extends CommandProcessor {
         if (accountType.equalsIgnoreCase("checking")) {
             Checking checkingAccount = new Checking(accountID, accountAPR);
             bank.addAccount(checkingAccount);
-        } else if (accountType.equalsIgnoreCase("saving")) {
+        } else if (accountType.equalsIgnoreCase("savings")) {
             Saving savingAccount = new Saving(accountID, accountAPR);
             bank.addAccount(savingAccount);
         } else if (accountType.equalsIgnoreCase("cd")) {

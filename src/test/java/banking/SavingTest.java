@@ -2,11 +2,11 @@ package banking;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SavingTest {
 
-    public static final String SAVING = "saving";
+    public static final String SAVING = "savings";
     public static final String ZERO_IDENTIFIER = "00000000";
     public static final double APR = 0.01;
 
@@ -33,6 +33,31 @@ public class SavingTest {
     void saving_account_APR() {
         assertEquals(APR, getApr());
     }
+
+    @Test
+    void saving_account_withdraw() {
+        saving.withdraw(0);
+        assertEquals(0, saving.getBalance());
+    }
+
+    @Test
+    void saving_account_withdraw_over_limit() {
+        saving.deposit(300);
+        saving.withdraw(5000);
+        assertEquals(0, saving.getBalance());
+    }
+
+    @Test
+    void saving_able_to_withdraw() {
+        assertTrue(saving.isAbleToWithdraw());
+    }
+
+    @Test
+    void saving_not_able_to_withdraw() {
+        saving.withdraw(5000);
+        assertFalse(saving.isAbleToWithdraw());
+    }
+
 
     private double getApr() {
         return saving.getAPR();

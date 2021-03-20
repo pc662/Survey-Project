@@ -3,7 +3,7 @@ package banking;
 public class Saving extends Account {
 
     public Saving(String identifier, double apr) {
-        super("saving", identifier, apr);
+        super("savings", identifier, apr);
     }
 
     @Override

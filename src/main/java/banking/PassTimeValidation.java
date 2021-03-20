@@ -28,12 +28,10 @@ public class PassTimeValidation extends Validation {
 
     public boolean validateMonth() {
         month = Integer.parseInt(splitString[1]);
-        if (month < 2) {
-            return false;
-        } else if (month > 60) {
+        if (month < 1) {
             return false;
         } else {
-            return true;
+            return month <= 60;
         }
     }
 }

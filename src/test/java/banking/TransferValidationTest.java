@@ -337,6 +337,16 @@ public class TransferValidationTest {
         assertFalse(validation.validate("transfer " + savingID1 + " " + savingID1 + " 1000"));
     }
 
+    @Test
+    void transfer_saving_to_account_that_does_not_exist() {
+        assertFalse(validation.validate("transfer " + savingID1 + " " + "29384950 1000"));
+    }
+
+    @Test
+    void transfer_from_two_nonexistent_accounts() {
+        assertFalse(validation.validate("transfer 30495039 10293948 1000"));
+    }
+
 
     private Validation verify() {
         return new Validation(bank);

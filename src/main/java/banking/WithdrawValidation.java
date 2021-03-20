@@ -45,10 +45,8 @@ public class WithdrawValidation extends Validation {
             return validateSaving();
         } else if (isChecking()) {
             return validateChecking();
-        } else if (isCd()) {
-            return validateCD();
         } else {
-            return false;
+            return validateCD();
         }
     }
 
@@ -84,16 +82,13 @@ public class WithdrawValidation extends Validation {
         return money > bank.getAccount(ID).getBalance();
     }
 
-    private boolean isCd() {
-        return bank.getAccount(ID).getAccountType().equalsIgnoreCase("cd");
-    }
 
     private boolean isChecking() {
         return bank.getAccount(ID).getAccountType().equalsIgnoreCase("checking");
     }
 
     private boolean isSaving() {
-        return bank.getAccount(ID).getAccountType().equalsIgnoreCase("saving");
+        return bank.getAccount(ID).getAccountType().equalsIgnoreCase("savings");
     }
 
 

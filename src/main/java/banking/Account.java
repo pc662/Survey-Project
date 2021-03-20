@@ -83,7 +83,7 @@ public abstract class Account {
         switch (accountType) {
             case "checking":
                 return validateChecking(depositAmount);
-            case "saving":
+            case "savings":
                 return validateSavings(depositAmount);
             default:
                 return false;
@@ -96,10 +96,6 @@ public abstract class Account {
 
     private boolean validateSavings(double depositAmount) {
         return !(depositAmount > 2500) && !(depositAmount < 0);
-    }
-
-    protected boolean isLessThanZero(double amount) {
-        return amount <= 0;
     }
 
 }

@@ -14,6 +14,7 @@ public class MasterControl {
         this.commandValidator = commandValidator;
         this.commandProcessor = commandProcessor;
         this.commandStorage = commandStorage;
+
     }
 
 
@@ -21,10 +22,14 @@ public class MasterControl {
         for (String command : input) {
             if (commandValidator.validate(command)) {
                 commandProcessor.process(command);
+                commandStorage.checkCommandType(command, bank);
             } else {
                 commandStorage.storeInvalidCommand(command);
             }
         }
-        return commandStorage.getInvalidCommands();
+        return commandStorage.getOutput(bank);
     }
+
+
 }
+
