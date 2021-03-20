@@ -35,6 +35,8 @@ public class Validation {
             return new PassTimeValidation(bank).validate(originalString);
         } else if (splitString[0].equalsIgnoreCase("withdraw")) {
             return new WithdrawValidation(bank).validate(originalString);
+        } else if (splitString[0].equalsIgnoreCase("transfer")) {
+            return new TransferValidation(bank).validate(originalString);
         } else {
             return false;
         }
