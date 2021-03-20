@@ -28,11 +28,29 @@ public class TransferValidation extends Validation {
     private boolean isTransferValid() {
         accountToWithdrawID = splitString[1];
         accountToDepositID = splitString[2];
+        if (sameAccounts()) {
+            return false;
+        } else if (eitherAccountsAreCD()) {
+            return false;
+        } else {
+            return validateTransfer();
+        }
+    }
+
+    private boolean sameAccounts() {
+        return accountToDepositID.equals(accountToWithdrawID);
+    }
+
+    private boolean validateTransfer() {
         if (isValidTransferAmount()) {
             return validateWithdraw();
         } else {
             return false;
         }
+    }
+
+    private boolean eitherAccountsAreCD() {
+        return bank.getAccount(accountToWithdrawID).getAccountType().equalsIgnoreCase("cd") || bank.getAccount(accountToDepositID).getAccountType().equalsIgnoreCase("cd");
     }
 
     private boolean validateWithdraw() {

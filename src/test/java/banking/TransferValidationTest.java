@@ -14,6 +14,9 @@ public class TransferValidationTest {
     String savingID1 = "00000000";
     String savingID2 = "00000001";
 
+    String cdID1 = "87654321";
+    String cdID2 = "76543210";
+
     double APR = 0.6;
 
     Validation validation;
@@ -23,6 +26,8 @@ public class TransferValidationTest {
     Account checking2;
     Account saving1;
     Account saving2;
+    Account cd1;
+    Account cd2;
 
     @BeforeEach
     void setUp() {
@@ -32,11 +37,15 @@ public class TransferValidationTest {
         checking2 = new Checking(checkingID2, APR);
         saving1 = new Saving(savingID1, APR);
         saving2 = new Saving(savingID2, APR);
+        cd1 = new CertificateOfDeposit(cdID1, APR, 5000);
+        cd2 = new CertificateOfDeposit(cdID2, APR, 5000);
 
         bank.addAccount(checking1);
         bank.addAccount(checking2);
         bank.addAccount(saving1);
         bank.addAccount(saving2);
+        bank.addAccount(cd1);
+        bank.addAccount(cd2);
     }
 
     @Test
@@ -271,6 +280,61 @@ public class TransferValidationTest {
         checking1.deposit(5000);
         bank.transfer(saving1, checking1, 1000);
         assertFalse(validation.validate("transfer " + savingID1 + " " + checkingID1 + " 1000"));
+    }
+
+    @Test
+    void transfer_10000_from_cd_to_cd() {
+        assertFalse(validation.validate("transfer " + cdID1 + " " + cdID2 + " 10000"));
+    }
+
+    @Test
+    void transfer_0_from_cd_to_cd() {
+        assertFalse(validation.validate("transfer " + cdID1 + " " + cdID2 + " 0"));
+    }
+
+    @Test
+    void transfer_10000_from_cd_to_checking() {
+        assertFalse(validation.validate("transfer " + cdID1 + " " + checkingID1 + " 10000"));
+    }
+
+    @Test
+    void transfer_10000_from_cd_to_saving() {
+        assertFalse(validation.validate("transfer " + cdID1 + " " + savingID1 + " 10000"));
+    }
+
+    @Test
+    void transfer_10000_from_checking_to_cd() {
+        assertFalse(validation.validate("transfer " + checkingID1 + " " + cdID1 + " 10000"));
+    }
+
+    @Test
+    void transfer_10000_from_saving_to_cd() {
+        assertFalse(validation.validate("transfer " + savingID1 + " " + cdID1 + " 10000"));
+    }
+
+    @Test
+    void transfer_with_no_other_arguments() {
+        assertFalse(validation.validate("transfer "));
+    }
+
+    @Test
+    void transfer_with_two_arguments() {
+        assertFalse(validation.validate("transfer " + checkingID1));
+    }
+
+    @Test
+    void transfer_with_three_arguments() {
+        assertFalse(validation.validate("transfer " + checkingID1 + " " + savingID1));
+    }
+
+    @Test
+    void transfer_checking_to_itself() {
+        assertFalse(validation.validate("transfer " + checkingID1 + " " + checkingID1 + " 1000"));
+    }
+
+    @Test
+    void transfer_saving_to_itself() {
+        assertFalse(validation.validate("transfer " + savingID1 + " " + savingID1 + " 1000"));
     }
 
 
