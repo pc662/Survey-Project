@@ -64,20 +64,12 @@ public class TransferValidation extends Validation {
     }
 
     private boolean validateWithdraw() {
-        if (validateWithdrawID()) {
-            return validateDepositID();
-        } else {
-            return false;
-        }
+        return validateWithdrawID();
     }
 
 
     private boolean validateWithdrawID() {
         return new Validation(bank).validate("withdraw " + accountToWithdrawID + " " + transferAmount);
-    }
-
-    private boolean validateDepositID() {
-        return new Validation(bank).validate("deposit " + accountToDepositID + " " + transferAmount);
     }
 
     private boolean isValidTransferAmount() {

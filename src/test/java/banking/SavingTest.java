@@ -2,7 +2,7 @@ package banking;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SavingTest {
 
@@ -45,6 +45,17 @@ public class SavingTest {
         saving.deposit(300);
         saving.withdraw(5000);
         assertEquals(0, saving.getBalance());
+    }
+
+    @Test
+    void saving_able_to_withdraw() {
+        assertTrue(saving.isAbleToWithdraw());
+    }
+
+    @Test
+    void saving_not_able_to_withdraw() {
+        saving.withdraw(5000);
+        assertFalse(saving.isAbleToWithdraw());
     }
 
 
