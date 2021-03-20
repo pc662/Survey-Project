@@ -32,6 +32,13 @@ public class CheckingTest {
         assertEquals(APR, getApr());
     }
 
+    @Test
+    void checking_account_withdraw() {
+        checking.deposit(0);
+        checking.withdraw(1000);
+        assertEquals(0, checking.getBalance());
+    }
+
     private double getApr() {
         return checking.getAPR();
     }

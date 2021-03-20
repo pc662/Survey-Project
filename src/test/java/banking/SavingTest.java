@@ -34,6 +34,20 @@ public class SavingTest {
         assertEquals(APR, getApr());
     }
 
+    @Test
+    void saving_account_withdraw() {
+        saving.withdraw(0);
+        assertEquals(0, saving.getBalance());
+    }
+
+    @Test
+    void saving_account_withdraw_over_limit() {
+        saving.deposit(300);
+        saving.withdraw(5000);
+        assertEquals(0, saving.getBalance());
+    }
+
+
     private double getApr() {
         return saving.getAPR();
     }

@@ -98,8 +98,4 @@ public abstract class Account {
         return !(depositAmount > 2500) && !(depositAmount < 0);
     }
 
-    protected boolean isLessThanZero(double amount) {
-        return amount <= 0;
-    }
-
 }
