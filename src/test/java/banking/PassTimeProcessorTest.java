@@ -35,6 +35,13 @@ public class PassTimeProcessorTest {
     }
 
     @Test
+    void process_pass_time_for_checking_capitalized() {
+        bank.addAccount(checking);
+        process("Pass 1");
+        assertTrue(bank.getStoredAccounts().isEmpty());
+    }
+
+    @Test
     void process_pass_time_for_saving() {
         bank.addAccount(saving);
         process("pass 1");

@@ -37,23 +37,41 @@ public class Output {
 
     private void iterateThroughValidCommands() {
         for (String accountIdentifier : validCommands.keySet()) {
-            List<String> transactionHistory = validCommands.get(accountIdentifier);
-            accountType = bank.getAccount(accountIdentifier).getAccountType();
-            accountType = accountType.substring(0, 1).toUpperCase() + accountType.substring(1).toLowerCase();
-
-            accountID = accountIdentifier;
-
-            accountBalance = bank.getAccount(accountID).getBalance();
-            DecimalFormat decimalFormat = new DecimalFormat("0.00");
-            decimalFormat.setRoundingMode(RoundingMode.FLOOR);
-            formattedAccountBalance = decimalFormat.format(accountBalance);
-
-            accountAPR = bank.getAccount(accountID).getAPR();
-            formattedAPR = decimalFormat.format(accountAPR);
-
-            accountState = accountType + " " + accountID + " " + formattedAccountBalance + " " + formattedAPR;
-            output.add(accountState);
+            List<String> transactionHistory = formatOutput(accountIdentifier);
             output.addAll(transactionHistory);
         }
+    }
+
+    private List<String> formatOutput(String accountIdentifier) {
+        List<String> transactionHistory = validCommands.get(accountIdentifier);
+
+        formatAccountType(accountIdentifier);
+
+        formatAccountID(accountIdentifier);
+
+        formatAccountBalanceAndAPR();
+
+        accountState = accountType + " " + accountID + " " + formattedAccountBalance + " " + formattedAPR;
+        output.add(accountState);
+        return transactionHistory;
+    }
+
+    private void formatAccountID(String accountIdentifier) {
+        accountID = accountIdentifier;
+    }
+
+    private void formatAccountBalanceAndAPR() {
+        accountBalance = bank.getAccount(accountID).getBalance();
+        DecimalFormat decimalFormat = new DecimalFormat("0.00");
+        decimalFormat.setRoundingMode(RoundingMode.FLOOR);
+        formattedAccountBalance = decimalFormat.format(accountBalance);
+
+        accountAPR = bank.getAccount(accountID).getAPR();
+        formattedAPR = decimalFormat.format(accountAPR);
+    }
+
+    private void formatAccountType(String accountIdentifier) {
+        accountType = bank.getAccount(accountIdentifier).getAccountType();
+        accountType = accountType.substring(0, 1).toUpperCase() + accountType.substring(1).toLowerCase();
     }
 }
