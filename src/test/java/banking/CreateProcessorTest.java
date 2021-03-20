@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class CreateProcessorTest {
 
     String checkingAccountCommand = "create checking 01234567 0.1";
-    String savingAccountCommand = "create saving 12345678 0.1";
+    String savingAccountCommand = "create savings 12345678 0.1";
     String cdAccountCommand = "create cd 00000000 0.1 100";
 
     String checkingType = "checking";

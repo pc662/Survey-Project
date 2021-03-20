@@ -44,7 +44,7 @@ public class PassTimeValidationTest {
 
     @Test
     void pass_time_1() {
-        assertFalse(validation.validate("pass 1"));
+        assertTrue(validation.validate("pass 1"));
     }
 
     @Test
