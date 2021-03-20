@@ -65,11 +65,7 @@ public class WithdrawValidation extends Validation {
     }
 
     private boolean validateChecking() {
-        if (bank.getAccount(ID).isAbleToWithdraw()) {
-            return validateCheckingAmount();
-        } else {
-            return false;
-        }
+        return validateCheckingAmount();
     }
 
     private boolean validateCheckingAmount() {

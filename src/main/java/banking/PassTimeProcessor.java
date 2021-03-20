@@ -16,4 +16,5 @@ public class PassTimeProcessor extends CommandProcessor {
     private void setMonth(String[] command) {
         months = Integer.parseInt(command[1]);
     }
+
 }

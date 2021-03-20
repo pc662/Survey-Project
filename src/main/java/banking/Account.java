@@ -5,6 +5,7 @@ public abstract class Account {
     protected boolean ableToWithdraw = true;
     int monthsPassed = 1;
     private double balance = 0;
+    private double amountWithdrawn;
     private String accountType;
     private String ID;
     private double APR;
@@ -57,11 +58,21 @@ public abstract class Account {
     }
 
     public void withdraw(double amount) {
-        balance -= amount;
-        if (isLessThanZero(balance)) {
+        if (amount >= balance) {
+            amountWithdrawn = balance;
             balance = 0;
+        } else {
+            amountWithdrawn = amount;
+            balance = balance - amount;
         }
+    }
 
+    public double getAmountWithdrawn() {
+        return amountWithdrawn;
+    }
+
+    public void setAmountWithdrawn(double amount) {
+        amountWithdrawn = amount;
     }
 
     public double getAPR() {

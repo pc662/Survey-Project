@@ -8,9 +8,12 @@ public class Saving extends Account {
 
     @Override
     public void withdraw(double amount) {
-        setBalance(getBalance() - amount);
-        if (isLessThanZero(getBalance())) {
+        if (amount >= getBalance()) {
+            setAmountWithdrawn(getBalance());
             setBalance(0);
+        } else {
+            setAmountWithdrawn(amount);
+            setBalance(getBalance() - amount);
         }
         setWithdrawFalse();
     }

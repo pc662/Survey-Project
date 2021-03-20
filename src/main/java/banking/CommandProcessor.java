@@ -3,7 +3,7 @@ package banking;
 public class CommandProcessor {
     protected String[] parsedCommand;
     protected Bank bank;
-    private String command;
+    protected String command;
 
 
     public CommandProcessor(Bank bank) {
@@ -21,6 +21,8 @@ public class CommandProcessor {
             new PassTimeProcessor(bank).process(parsedCommand);
         } else if (parsedCommand[0].equalsIgnoreCase("withdraw")) {
             new WithdrawProcessor(bank).process(parsedCommand);
+        } else if (parsedCommand[0].equalsIgnoreCase("transfer")) {
+            new TransferProcessor(bank).process(parsedCommand);
         }
 
     }

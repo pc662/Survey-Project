@@ -23,8 +23,18 @@ public class PassTimeValidationTest {
     }
 
     @Test
+    void pass_time_2_with_end_space() {
+        assertTrue(validation.validate("Pass 2        "));
+    }
+
+    @Test
     void pass_time_2_different_cases() {
         assertTrue(validation.validate("pAsS 2"));
+    }
+
+    @Test
+    void pass_time_2_with_middle_space() {
+        assertFalse(validation.validate("Pass        2"));
     }
 
     @Test
@@ -125,6 +135,11 @@ public class PassTimeValidationTest {
     @Test
     void pass_time_with_only_decimal_at_end() {
         assertFalse(validation.validate("pass 2."));
+    }
+
+    @Test
+    void pass_time_with_only_decimal_at_end_and_spaces_at_end() {
+        assertFalse(validation.validate("pass 2.                 "));
     }
 
     private Validation verify() {
