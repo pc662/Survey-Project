@@ -22,21 +22,27 @@ public class MasterControl {
     public List<String> start(List<String> input) {
         for (String command : input) {
             if (commandValidator.validate(command)) {
-                parsedCommand = command.split(" ", 0);
-                checkCreate(parsedCommand[0]);
+                checkCommandType(command);
+                commandProcessor.process(command);
             } else {
                 commandStorage.storeInvalidCommand(command);
             }
         }
-        return commandStorage.getInvalidCommands();
+        return commandStorage.getOutput();
     }
 
-    private void checkCreate(String command) {
-        if (command.equalsIgnoreCase("create")) {
-            commandStorage.createHistory();
-        } else if (command.equalsIgnoreCase("deposit")) {
-            commandStorage.storeValidCommand();
+    private void checkCommandType(String command) {
+        parsedCommand = command.split(" ", 0);
+        if (parsedCommand[0].equalsIgnoreCase("create")) {
+            commandStorage.createHistory(parsedCommand[2]);
+        } else if (parsedCommand[0].equalsIgnoreCase("deposit")) {
+            commandStorage.storeValidCommand(parsedCommand[1], command);
+        } else if (parsedCommand[0].equalsIgnoreCase("withdraw")) {
+            commandStorage.storeValidCommand(parsedCommand[1], command);
+        } else if (parsedCommand[0].equalsIgnoreCase("transfer")) {
+            commandStorage.storeValidCommand(parsedCommand[1], command);
+            commandStorage.storeValidCommand(parsedCommand[2], command);
         }
     }
 }
-}
+

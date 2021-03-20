@@ -22,22 +22,6 @@ public class MasterControlTest {
 
     }
 
-    @Test
-    void typo_in_create_command_is_invalid() {
-        input.add("creat checking 12345678 1.0");
-
-        List<String> actual = masterControl.start(input);
-        assertSingleCommand(actual, "creat checking 12345678 1.0");
-    }
-
-
-    @Test
-    void typo_in_deposit_command_is_invalid() {
-        input.add("depositt 12345678 100");
-
-        List<String> actual = masterControl.start(input);
-        assertSingleCommand(actual, "depositt 12345678 100");
-    }
 
     @Test
     void two_typo_commands_both_invalid() {
@@ -51,29 +35,5 @@ public class MasterControlTest {
         assertEquals("depositt 12345678 100", actual.get(1));
     }
 
-    @Test
-    void invalid_to_create_accounts_with_same_ID() {
-        input.add("create checking 12345678 1.0");
-        input.add("create checking 12345678 1.0");
-
-        List<String> actual = masterControl.start(input);
-
-        assertSingleCommand(actual, "create checking 12345678 1.0");
-    }
-
-    @Test
-    void invalid_to_deposit_into_cd() {
-        input.add("create cd 12345678 1.0 1000");
-        input.add("deposit 12345678 100");
-
-        List<String> actual = masterControl.start(input);
-
-        assertSingleCommand(actual, "deposit 12345678 100");
-    }
-
-    private void assertSingleCommand(List<String> actual, String s) {
-        assertEquals(1, actual.size());
-        assertEquals(s, actual.get(0));
-    }
 
 }
