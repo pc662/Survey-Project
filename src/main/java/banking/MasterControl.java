@@ -7,7 +7,6 @@ public class MasterControl {
     Validation commandValidator;
     CommandProcessor commandProcessor;
     CommandStorage commandStorage;
-    String[] parsedCommand;
 
     public MasterControl(Bank bank, Validation commandValidator, CommandProcessor commandProcessor,
                          CommandStorage commandStorage) {
@@ -23,7 +22,7 @@ public class MasterControl {
         for (String command : input) {
             if (commandValidator.validate(command)) {
                 commandProcessor.process(command);
-                checkCommandType(command);
+                commandStorage.checkCommandType(command, bank);
             } else {
                 commandStorage.storeInvalidCommand(command);
             }
@@ -31,20 +30,6 @@ public class MasterControl {
         return commandStorage.getOutput(bank);
     }
 
-    private void checkCommandType(String command) {
-        parsedCommand = command.split(" ", 0);
-        if (parsedCommand[0].equalsIgnoreCase("create")) {
-            commandStorage.createHistory(parsedCommand[2]);
-        } else if (parsedCommand[0].equalsIgnoreCase("pass")) {
-            commandStorage.checkAccount(bank);
-        } else if (parsedCommand[0].equalsIgnoreCase("deposit")) {
-            commandStorage.storeValidCommand(parsedCommand[1], command);
-        } else if (parsedCommand[0].equalsIgnoreCase("withdraw")) {
-            commandStorage.storeValidCommand(parsedCommand[1], command);
-        } else if (parsedCommand[0].equalsIgnoreCase("transfer")) {
-            commandStorage.storeValidCommand(parsedCommand[1], command);
-            commandStorage.storeValidCommand(parsedCommand[2], command);
-        }
-    }
+
 }
 
