@@ -83,6 +83,7 @@ public class TransferProcessorTest {
         assertEquals(6000, bank.getAccount(savingID2).getBalance());
     }
 
+
     private void process(String checkingAccountCommand) {
         CommandProcessor commandProcessor = new CommandProcessor(bank);
         commandProcessor.process(checkingAccountCommand);

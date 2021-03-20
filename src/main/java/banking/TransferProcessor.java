@@ -15,5 +15,6 @@ public class TransferProcessor extends CommandProcessor {
         accountToDeposit = bank.getAccount(parsedCommand[2]);
         moneyToTransfer = Double.parseDouble(parsedCommand[3]);
         bank.transfer(accountToWithdraw, accountToDeposit, moneyToTransfer);
+
     }
 }
