@@ -83,7 +83,7 @@ public abstract class Account {
         switch (accountType) {
             case "checking":
                 return validateChecking(depositAmount);
-            case "saving":
+            case "savings":
                 return validateSavings(depositAmount);
             default:
                 return false;

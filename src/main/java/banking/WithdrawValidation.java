@@ -93,7 +93,7 @@ public class WithdrawValidation extends Validation {
     }
 
     private boolean isSaving() {
-        return bank.getAccount(ID).getAccountType().equalsIgnoreCase("saving");
+        return bank.getAccount(ID).getAccountType().equalsIgnoreCase("savings");
     }
 
 

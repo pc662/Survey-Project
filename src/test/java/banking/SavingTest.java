@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SavingTest {
 
-    public static final String SAVING = "saving";
+    public static final String SAVING = "savings";
     public static final String ZERO_IDENTIFIER = "00000000";
     public static final double APR = 0.01;
 

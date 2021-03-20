@@ -30,11 +30,17 @@ public class TransferValidation extends Validation {
         accountToDepositID = splitString[2];
         if (sameAccounts()) {
             return false;
+        } else if (accountsDoNotExist()) {
+            return false;
         } else if (eitherAccountsAreCD()) {
             return false;
         } else {
             return validateTransfer();
         }
+    }
+
+    private boolean accountsDoNotExist() {
+        return !bank.getStoredAccounts().containsKey(accountToDepositID) && !bank.getStoredAccounts().containsKey(accountToWithdrawID);
     }
 
     private boolean sameAccounts() {

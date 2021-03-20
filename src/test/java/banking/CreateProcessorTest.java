@@ -12,7 +12,7 @@ public class CreateProcessorTest {
     String cdAccountCommand = "create cd 00000000 0.1 100";
 
     String checkingType = "checking";
-    String savingType = "saving";
+    String savingType = "savings";
     String cdType = "cd";
 
     String checkingID = "01234567";

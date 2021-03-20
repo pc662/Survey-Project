@@ -30,4 +30,17 @@ public class CommandStorage {
     public List<String> getOutput(Bank bank) {
         return new Output(validCommands, invalidCommands).output(bank);
     }
+
+    public void checkAccount(Bank bank) {
+        checkIfAccountRemoved(bank);
+    }
+
+    private void checkIfAccountRemoved(Bank bank) {
+        LinkedHashMap<String, List<String>> validCommandsCopy = new LinkedHashMap<>(validCommands);
+        for (String accountID : validCommandsCopy.keySet()) {
+            if (!bank.getStoredAccounts().containsKey(accountID)) {
+                validCommands.remove(accountID);
+            }
+        }
+    }
 }

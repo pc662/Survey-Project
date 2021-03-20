@@ -42,6 +42,8 @@ public class MasterControl {
         } else if (parsedCommand[0].equalsIgnoreCase("transfer")) {
             commandStorage.storeValidCommand(parsedCommand[1], command);
             commandStorage.storeValidCommand(parsedCommand[2], command);
+        } else if (parsedCommand[0].equalsIgnoreCase("pass")) {
+            commandStorage.checkAccount(bank);
         }
     }
 }
