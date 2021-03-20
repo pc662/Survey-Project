@@ -104,15 +104,36 @@ public class MasterControlTest {
     @Test
     void break_it_down1() {
         input.add("create savings 12345678 0.6");
-        //input.add("Deposit 12345678 700");
-        //input.add("Deposit 12345678 5000");
+        input.add("create checking 01234567 0.6");
+        input.add("deposit 01234567 400");
+        input.add("Pass 2");
 
         List<String> actual = masterControl.start(input);
 
-        assertEquals(1, actual.size());
-        assertEquals("Savings 12345678 0.00 0.60", actual.get(0));
-        //assertEquals("Deposit 12345678 700", actual.get(1));
-        //assertEquals("Deposit 12345678 5000", actual.get(2));
+        assertEquals(2, actual.size());
+        assertEquals("Checking 01234567 400.40 0.60", actual.get(0));
+        assertEquals("deposit 01234567 400", actual.get(1));
+    }
+
+    @Test
+    void break_it_down2() {
+        input.add("Create savings 12345678 0.6");
+        input.add("Deposit 12345678 700");
+        input.add("Deposit 12345678 5000");
+        input.add("creAte cHecKing 98765432 0.01");
+        input.add("Deposit 98765432 300");
+        input.add("Transfer 98765432 12345678 300");
+
+        List<String> actual = masterControl.start(input);
+
+        assertEquals(7, actual.size());
+        assertEquals("Savings 12345678 1000.00 0.60", actual.get(0));
+        assertEquals("Deposit 12345678 700", actual.get(1));
+        assertEquals("Transfer 98765432 12345678 300", actual.get(2));
+        assertEquals("Checking 98765432 0.00 0.01", actual.get(3));
+        assertEquals("Deposit 98765432 300", actual.get(4));
+        assertEquals("Transfer 98765432 12345678 300", actual.get(5));
+        assertEquals("Deposit 12345678 5000", actual.get(6));
 
     }
 

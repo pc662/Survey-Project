@@ -22,8 +22,8 @@ public class MasterControl {
     public List<String> start(List<String> input) {
         for (String command : input) {
             if (commandValidator.validate(command)) {
-                checkCommandType(command);
                 commandProcessor.process(command);
+                checkCommandType(command);
             } else {
                 commandStorage.storeInvalidCommand(command);
             }
@@ -35,6 +35,8 @@ public class MasterControl {
         parsedCommand = command.split(" ", 0);
         if (parsedCommand[0].equalsIgnoreCase("create")) {
             commandStorage.createHistory(parsedCommand[2]);
+        } else if (parsedCommand[0].equalsIgnoreCase("pass")) {
+            commandStorage.checkAccount(bank);
         } else if (parsedCommand[0].equalsIgnoreCase("deposit")) {
             commandStorage.storeValidCommand(parsedCommand[1], command);
         } else if (parsedCommand[0].equalsIgnoreCase("withdraw")) {
@@ -42,8 +44,6 @@ public class MasterControl {
         } else if (parsedCommand[0].equalsIgnoreCase("transfer")) {
             commandStorage.storeValidCommand(parsedCommand[1], command);
             commandStorage.storeValidCommand(parsedCommand[2], command);
-        } else if (parsedCommand[0].equalsIgnoreCase("pass")) {
-            commandStorage.checkAccount(bank);
         }
     }
 }
