@@ -197,7 +197,55 @@ public class MasterControlTest {
         assertEquals("Cd 23456789 2000.00 1.20", actual.get(3));
         assertEquals("Deposit 12345678 5000", actual.get(4));
         assertEquals("withDraw 98765432 400.01", actual.get(5));
+    }
 
+    @Test
+    void sample_make_sure_this_passes_unchanged_or_you_will_fail_3() {
+        input.add("Create savings 12345678 0.6");
+        input.add("Deposit 12345678 700");
+        input.add("Deposit 12345678 5000");
+        input.add("creAte cHecKing 98765432 0.01");
+        input.add("Deposit 98765432 300");
+        input.add("Transfer 98765432 12345678 300");
+        input.add("withDraw 98765432 400.01");
+        input.add("Pass 1");
+        input.add("Create cd 23456789 1.2 2000");
+        input.add("Pass 12");
+        input.add("withdraw 23456789 5000");
+        List<String> actual = masterControl.start(input);
+
+        assertEquals(7, actual.size());
+        assertEquals("Savings 12345678 1006.51 0.60", actual.get(0));
+        assertEquals("Deposit 12345678 700", actual.get(1));
+        assertEquals("Transfer 98765432 12345678 300", actual.get(2));
+        assertEquals("Cd 23456789 0.00 1.20", actual.get(3));
+        assertEquals("withdraw 23456789 5000", actual.get(4));
+        assertEquals("Deposit 12345678 5000", actual.get(5));
+        assertEquals("withDraw 98765432 400.01", actual.get(6));
+    }
+
+    @Test
+    void sample_make_sure_this_passes_unchanged_or_you_will_fail_4() {
+        input.add("Create savings 12345678 0.6");
+        input.add("Deposit 12345678 700");
+        input.add("Deposit 12345678 5000");
+        input.add("creAte cHecKing 98765432 0.01");
+        input.add("Deposit 98765432 300");
+        input.add("Transfer 98765432 12345678 300");
+        input.add("withDraw 98765432 400.01");
+        input.add("Pass 1");
+        input.add("Create cd 23456789 1.2 2000");
+        input.add("Pass 12");
+        input.add("withdraw 23456789 5000");
+        input.add("Pass 1");
+        List<String> actual = masterControl.start(input);
+
+        assertEquals(5, actual.size());
+        assertEquals("Savings 12345678 1007.02 0.60", actual.get(0));
+        assertEquals("Deposit 12345678 700", actual.get(1));
+        assertEquals("Transfer 98765432 12345678 300", actual.get(2));
+        assertEquals("Deposit 12345678 5000", actual.get(3));
+        assertEquals("withDraw 98765432 400.01", actual.get(4));
     }
 
 
