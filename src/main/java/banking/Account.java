@@ -71,6 +71,10 @@ public abstract class Account {
         return amountWithdrawn;
     }
 
+    public void setAmountWithdrawn(double amount) {
+        amountWithdrawn = amount;
+    }
+
     public double getAPR() {
         return APR;
     }

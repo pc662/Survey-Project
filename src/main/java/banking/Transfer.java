@@ -10,7 +10,7 @@ public class Transfer {
         accountToDeposit = accountTo;
     }
 
-    public void transfer(int amountToTransfer) {
+    public void transfer(double amountToTransfer) {
         accountToWithdraw.withdraw(amountToTransfer);
         amountWithdrawn = accountToWithdraw.getAmountWithdrawn();
         accountToDeposit.deposit(amountWithdrawn);

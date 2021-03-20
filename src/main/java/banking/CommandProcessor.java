@@ -3,7 +3,7 @@ package banking;
 public class CommandProcessor {
     protected String[] parsedCommand;
     protected Bank bank;
-    private String command;
+    protected String command;
 
 
     public CommandProcessor(Bank bank) {
