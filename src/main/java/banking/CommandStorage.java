@@ -23,6 +23,10 @@ public class CommandStorage {
         return invalidCommands;
     }
 
+    public LinkedHashMap<String, List<String>> getValidCommands() {
+        return validCommands;
+    }
+
     protected void checkCommandType(String command, Bank bank) {
         parsedCommand = command.split(" ", 0);
         if (parsedCommand[0].equalsIgnoreCase("create")) {
