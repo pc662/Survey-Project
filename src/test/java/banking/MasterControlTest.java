@@ -35,5 +35,15 @@ public class MasterControlTest {
         assertEquals("depositt 12345678 100", actual.get(1));
     }
 
+    @Test
+    void test_correct_command() {
+        input.add("create checking 01234567 6.0");
+
+        List<String> actual = masterControl.start(input);
+
+        assertEquals(1, actual.size());
+        assertEquals("Checking 01234567 0.00 6.00", actual.get(0));
+    }
+
 
 }
