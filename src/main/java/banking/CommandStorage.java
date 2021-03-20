@@ -7,7 +7,7 @@ import java.util.List;
 public class CommandStorage {
 
     ArrayList<String> invalidCommands = new ArrayList<>();
-    LinkedHashMap<String, List<String>> validCommands;
+    LinkedHashMap<String, List<String>> validCommands = new LinkedHashMap<>();
 
 
     public void storeInvalidCommand(String string) {
@@ -27,7 +27,7 @@ public class CommandStorage {
         validCommands.put(accountID, new ArrayList<>());
     }
 
-    public List<String> getOutput() {
-        return new Output(validCommands, invalidCommands).output();
+    public List<String> getOutput(Bank bank) {
+        return new Output(validCommands, invalidCommands).output(bank);
     }
 }

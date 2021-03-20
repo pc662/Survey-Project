@@ -28,7 +28,7 @@ public class MasterControl {
                 commandStorage.storeInvalidCommand(command);
             }
         }
-        return commandStorage.getOutput();
+        return commandStorage.getOutput(bank);
     }
 
     private void checkCommandType(String command) {
