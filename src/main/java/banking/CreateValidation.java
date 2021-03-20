@@ -18,26 +18,17 @@ public class CreateValidation extends Validation {
 
 
     public boolean validateCommand() {
-        if (isCreateCommand()) {
-            if (checkLength()) {
-                return false;
-            }
+        if (checkLength()) {
+            return false;
+        } else {
             command = splitString[0];
             return validateAccountType();
-        } else {
-            return false;
         }
     }
 
-    private boolean isCreateCommand() {
-        return splitString[0].equalsIgnoreCase("create");
-    }
 
     private boolean checkLength() {
-        if (stringLength < 4 || stringLength > 5) {
-            return true;
-        }
-        return false;
+        return stringLength < 4 || stringLength > 5;
     }
 
 
@@ -55,9 +46,7 @@ public class CreateValidation extends Validation {
 
     private boolean isNotCDVerify() {
         if (!splitString[1].equalsIgnoreCase("cd")) {
-            if (stringLength >= 5) {
-                return true;
-            }
+            return stringLength >= 5;
         }
         return false;
     }
@@ -115,10 +104,7 @@ public class CreateValidation extends Validation {
     }
 
     private boolean ifCD() {
-        if (splitString[1].equalsIgnoreCase("cd")) {
-            return true;
-        }
-        return false;
+        return splitString[1].equalsIgnoreCase("cd");
     }
 
     private boolean validateCDAmount() {
