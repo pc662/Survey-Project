@@ -12,17 +12,9 @@ public class DepositValidation extends Validation {
         originalString = command;
         splitString = command.split(" ", 0);
         stringLength = splitString.length;
-        return validateCommand();
+        return checkLength();
     }
 
-
-    public boolean validateCommand() {
-        if (splitString[0].equalsIgnoreCase("deposit")) {
-            return checkLength();
-        } else {
-            return false;
-        }
-    }
 
     private boolean checkLength() {
         if (stringLength != 3) {
